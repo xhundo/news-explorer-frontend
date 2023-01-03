@@ -1,0 +1,137 @@
+.savedcard {
+  position: relative;
+  max-width: 400px;
+  max-height: 576px;
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 0 10px 16px 0;
+  box-shadow: rgba(8, 29, 45, 0.1);
+}
+
+.savedcard:nth-of-type(4n) {
+  margin: 0 10px 0 0;
+}
+
+.savedcard:nth-of-type(5n) {
+  margin: 0 10px 0 0;
+}
+
+.savedcard__content {
+  margin: 0 24px 24px 24px;
+}
+
+.savedcard__date {
+  font-family: 'Source Sans Pro';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgba(182, 188, 191, 1);
+  margin: 17px 0 15px 0;
+}
+
+.savedcard__title {
+  font-family: 'Roboto Slab';
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000;
+  margin: 0 0 16px 0;
+}
+
+.savedcard__paragraph {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.savedcard__topic {
+  font-family: 'Roboto Slab';
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.4000000059604645px;
+  text-align: left;
+  color: rgba(182, 188, 191, 1);
+  text-transform: uppercase;
+  margin: 18px 0 0 0;
+}
+
+.savedcard__trash-btn {
+  position: absolute;
+  top: 20px;
+  right: 17px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-image: url('../../images/trash.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+}
+
+.savedcard__topic-mark {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 20px;
+  left: 23px;
+  min-width: 87px;
+  height: 40px;
+  border: none;
+  font-family: 'Roboto';
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.savedcard__remove-text {
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.savedcard__topic-text {
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+.savedcard__topic-remove {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 20px;
+  left: 148px;
+  width: 187px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility ease-in 0.2s;
+  height: 40px;
+  border: none;
+}
+
+.savedcard__trash-btn:hover + .savedcard__topic-remove {
+  opacity: 1;
+  visibility: visible;
+}
+
+.savedcard__trash-btn:hover {
+  transition: 0.2s ease-in-out;
+  background-image: url('../../images/Union\ \(3\).svg');
+}

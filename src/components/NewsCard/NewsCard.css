@@ -1,0 +1,125 @@
+.newscard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  max-width: 400px;
+  max-height: 100%;
+  border-radius: 16px;
+  margin: 0 16px 64px 0;
+  box-shadow: rgba(8, 29, 45, 0.1);
+  overflow: hidden;
+}
+
+.newscard:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.newscard__content {
+  margin: 0 24px 0 24px;
+}
+
+.newscard__date {
+  font-family: 'Source Sans Pro';
+  color: #b6bcbf;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  margin: 20px 0 12px 0;
+  text-align: left;
+}
+
+.newscard__title {
+  font-family: 'Roboto Slab';
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0 0 16px 0;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.newscard__paragraph {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.newscard__topic {
+  font-family: 'Roboto Slab';
+  color: rgba(182, 188, 191, 1);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.4000000059604645px;
+  text-align: left;
+  margin: 18px 0 24px 0;
+}
+
+.newscard__save-btn {
+  position: absolute;
+  top: 19px;
+  right: 16px;
+  padding: 0px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  background-image: url('../../images/marker.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.newscard__btn-saved {
+  position: absolute;
+  top: 19px;
+  right: 16px;
+  padding: 0px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  background-image: url('../../images/saved.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.newscard__btn {
+  position: absolute;
+  top: 18px;
+  right: 71px;
+  border-radius: 10px;
+  border: none;
+  background-color: #fff;
+  width: 182px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease-in;
+  height: 40px;
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  cursor: pointer;
+  text-align: center;
+}
+
+.newscard__save-btn:hover + .newscard__btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+.newscard__save-btn:hover {
+  transition: ease-in-out 0.2s;
+  background-image: url('../../images/Rectangle\ 8\ \(1\).svg');
+}

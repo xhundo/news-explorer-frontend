@@ -1,0 +1,36 @@
+.about {
+  display: flex;
+  background-color: #fff;
+}
+
+.about-author__photo {
+  margin: 80px 56px 80px 104px;
+}
+
+.about__author-text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 131px;
+}
+
+.about__text {
+  font-family: 'Roboto Slab';
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: black;
+  margin: 0 0 24px 0;
+}
+
+.about__article {
+  max-width: 600px;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-bottom: 20px;
+}

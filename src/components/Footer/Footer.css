@@ -1,0 +1,47 @@
+.footer {
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__text {
+  margin: 30px 0 26px 104px;
+  color: rgba(182, 188, 191, 1);
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 106px;
+  cursor: pointer;
+}
+
+a {
+  color: black;
+}
+
+.footer__links {
+  margin-right: 40px;
+  cursor: pointer;
+  display: block;
+}
+
+.footer__icon-git {
+  background-image: url('../../images/Vector\ \(1\).svg');
+  width: 21px;
+  height: 21px;
+  background-repeat: no-repeat;
+  margin-right: 27px;
+  cursor: pointer;
+  display: block;
+}
+
+.footer__icon-facebook {
+  background-image: url('../../images/Vector\ \(2\).svg');
+  width: 21px;
+  height: 21px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  display: block;
+}

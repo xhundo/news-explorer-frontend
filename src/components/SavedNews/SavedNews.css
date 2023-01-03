@@ -1,0 +1,12 @@
+.savednews {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f6f7;
+}
+
+.saved-news__content {
+  display: inline-flex;
+  margin: 0 0 62px 104px;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
