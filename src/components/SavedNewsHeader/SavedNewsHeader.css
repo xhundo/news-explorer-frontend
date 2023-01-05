@@ -75,6 +75,7 @@
   .saved-news__title {
     margin: 0 16px 50px 16px;
     font-size: 30px;
+    width: 288px;
     line-height: 34px;
   }
 

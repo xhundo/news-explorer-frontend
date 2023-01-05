@@ -81,7 +81,7 @@ a {
   }
 
   .footer__nav {
-    margin: 21px 16px 0 0;
+    margin: 21px 16px 0 16px;
     justify-content: calc(100% - 30px);
     width: calc(100% - 30px);
   }
