@@ -34,3 +34,43 @@
   text-align: left;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 820px) {
+  .about-author__photo {
+    margin: 61px 32px 61px 40px;
+    width: 232px;
+  }
+
+  .about__author-text {
+    margin-top: 40px;
+  }
+
+  .about__text {
+    font-size: 30px;
+    margin: 0 0 16px 0;
+  }
+
+  .about__article {
+    margin: 0 40px 10px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+  }
+
+  .about-author__photo {
+    margin: 32px 24px 24px 24px;
+  }
+
+  .about__author-text {
+    margin: 0 16px 128px 16px;
+  }
+
+  .about__article {
+    margin: 0 0 20px 0;
+  }
+}

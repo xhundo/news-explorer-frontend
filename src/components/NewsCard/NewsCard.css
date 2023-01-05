@@ -123,3 +123,26 @@
   transition: ease-in-out 0.2s;
   background-image: url('../../images/Rectangle\ 8\ \(1\).svg');
 }
+
+@media screen and (max-width: 820px) {
+  .newscard {
+    max-width: 224px;
+    height: 100%;
+    margin: 0 8px 32px 0;
+  }
+
+  .newscard__title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .newscard {
+    max-width: 288px;
+  }
+
+  .newscard:nth-of-type(3n) {
+    margin: 0 0 0 0;
+  }
+}
