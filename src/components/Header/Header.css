@@ -277,4 +277,32 @@ a {
   .header__logo-switch {
     margin: 16px 0 16px 16px;
   }
+
+  .header-custom__btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    margin: 16px 16px 16px 0;
+  }
+
+  .header-custom__bar1,
+  .header-custom__bar2 {
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+
+  .header-custom__bar1-dark,
+  .header-custom__bar2-dark {
+    width: 24px;
+    height: 2px;
+    background-color: #000;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
 }

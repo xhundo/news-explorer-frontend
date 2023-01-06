@@ -14,7 +14,8 @@ function App() {
   const [user, setUser] = React.useState({
     name: 'Elise',
   });
-  const [isLoggedin, setIsLoggedIn] = React.useState(false);
+  const [isLoggedin, setIsLoggedIn] = React.useState(true);
+
   const [theme, changeTheme] = React.useState(false);
   const [signInOpen, setSignInOpen] = React.useState(false);
   const [showSignUp, setShowSignUp] = React.useState(false);

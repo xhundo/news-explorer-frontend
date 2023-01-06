@@ -16,6 +16,14 @@ function Header({ isLoggedin, handleModal, theme, setTheme, changeTheme }) {
           NewsExplorer
         </p>
       </Link>
+      <div className="header-custom__btn">
+        <div
+          className={theme ? `header-custom__bar1-dark` : `header-custom__bar1`}
+        ></div>
+        <div
+          className={theme ? `header-custom__bar2-dark` : `header-custom__bar2`}
+        ></div>
+      </div>
       <div className="header__nav">
         <Link to={'/'}>
           <p
