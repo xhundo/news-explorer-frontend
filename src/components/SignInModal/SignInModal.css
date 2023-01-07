@@ -89,3 +89,12 @@
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 520px) {
+  .signin__modal-button {
+    width: 288px;
+    height: 64px;
+    margin: 23px 16px 16px 16px;
+    align-self: center;
+  }
+}

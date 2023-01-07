@@ -6,7 +6,20 @@
   max-height: 80px;
 }
 
+.header__logo-none {
+  margin: 0 0 0 104px;
+  font-family: 'Roboto Slab';
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  cursor: pointer;
+}
+
 .header__switch {
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(209, 210, 214, 1);
@@ -200,6 +213,10 @@ a {
   margin: 0;
 }
 
+.header__menu {
+  display: none;
+}
+
 .header__nav-logout {
   background: transparent;
   background-image: url('../../images/Union\ \(1\).svg');
@@ -217,6 +234,10 @@ a {
 
   .header__nav-button {
     margin-right: 40px;
+  }
+
+  .header__logo-none {
+    margin-left: 40px;
   }
 
   .header__logo {
@@ -249,7 +270,11 @@ a {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 520px) {
+  .header {
+    z-index: 2;
+  }
+
   .header__nav-link {
     display: none;
   }
@@ -260,6 +285,7 @@ a {
 
   .header__logo {
     margin: 16px 0 16px 16px;
+    font-size: 16px;
   }
 
   .header__nav-article {
@@ -276,6 +302,7 @@ a {
 
   .header__logo-switch {
     margin: 16px 0 16px 16px;
+    font-size: 16px;
   }
 
   .header-custom__btn {
@@ -297,6 +324,14 @@ a {
     transition: 0.4s;
   }
 
+  .header-custom__bar1_change {
+    transform: translate(0, 5px) rotate(-45deg);
+  }
+
+  .header-custom__bar2_change {
+    transform: translate(0, -5px) rotate(45deg);
+  }
+
   .header-custom__bar1-dark,
   .header-custom__bar2-dark {
     width: 24px;
@@ -304,5 +339,9 @@ a {
     background-color: #000;
     margin: 4px 0;
     transition: 0.4s;
+  }
+
+  .header__logo-none {
+    display: none;
   }
 }

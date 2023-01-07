@@ -12,12 +12,15 @@
 }
 
 .modal__content {
+  display: flex;
+  flex-direction: column;
   position: relative;
   background-color: #fff;
   width: 430px;
   height: 380px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 3;
 }
 
 .modal__content-signup {
@@ -127,4 +130,32 @@
   margin-left: 36px;
   padding: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .modal {
+    width: 100%;
+    align-items: flex-end;
+    z-index: 3;
+  }
+
+  .modal__form {
+    width: 100%;
+  }
+
+  .modal__content {
+    width: 100%;
+    height: 89vh;
+  }
+
+  .modal__content-signup {
+    width: 100%;
+    height: 89vh;
+  }
+
+  .modal__close-btn {
+    top: -34px;
+    right: -13px;
+    background-image: url('../../images/back.svg');
+  }
 }

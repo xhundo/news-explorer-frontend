@@ -137,9 +137,10 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 520px) {
   .newscard {
     max-width: 288px;
+    z-index: 0;
   }
 
   .newscard:nth-of-type(3n) {

@@ -1,27 +1,75 @@
 import { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Header.css';
 
-function Header({ isLoggedin, handleModal, theme, setTheme, changeTheme }) {
+function Header({
+  isLoggedin,
+  handleModal,
+  theme,
+  setTheme,
+  changeTheme,
+  handleMenu,
+  handleMenuClose,
+  isIconActive,
+  setIsIconActive,
+  signInOpen,
+}) {
   const currentUser = useContext(CurrentUserContext);
+
+  const toggleIcon = () => {
+    if (isIconActive === false) {
+      setIsIconActive(true);
+      handleMenu();
+    } else {
+      setIsIconActive(false);
+      handleMenuClose();
+    }
+  };
 
   return (
     <header className={theme ? `header__switch` : `header`}>
       <Link to={'/'}>
         <p
           onClick={changeTheme}
-          className={theme ? `header__logo-switch` : `header__logo`}
+          className={
+            theme
+              ? `header__logo-switch`
+              : signInOpen
+              ? `header__logo-none`
+              : `header__logo`
+          }
         >
           NewsExplorer
         </p>
       </Link>
-      <div className="header-custom__btn">
+      <div className="header-custom__btn" onClick={toggleIcon}>
         <div
-          className={theme ? `header-custom__bar1-dark` : `header-custom__bar1`}
+          className={
+            theme
+              ? `header-custom__bar1-dark`
+              : signInOpen
+              ? ``
+              : `header-custom__bar1 ${
+                  isIconActive
+                    ? `header-custom__bar1_change`
+                    : `header-custom__bar1`
+                }`
+          }
         ></div>
         <div
-          className={theme ? `header-custom__bar2-dark` : `header-custom__bar2`}
+          className={
+            theme
+              ? `header-custom__bar2-dark`
+              : signInOpen
+              ? ``
+              : `header-custom__bar2 ${
+                  isIconActive
+                    ? `header-custom__bar2_change`
+                    : `header-custom__bar2`
+                }`
+          }
         ></div>
       </div>
       <div className="header__nav">

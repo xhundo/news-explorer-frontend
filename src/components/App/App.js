@@ -1,6 +1,6 @@
 import '../App/App.css';
 import '../../vendor/fonts/fonts.css';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
@@ -9,13 +9,14 @@ import Main from '../Main/Main';
 import SignInModal from '../SignInModal/SignInModal';
 import SavedNews from '../SavedNews/SavedNews';
 import { searchNews } from '../../utils/ThirdPartyApi';
+import Menu from '../Menu/Menu';
 
 function App() {
   const [user, setUser] = React.useState({
     name: 'Elise',
   });
   const [isLoggedin, setIsLoggedIn] = React.useState(true);
-
+  const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [theme, changeTheme] = React.useState(false);
   const [signInOpen, setSignInOpen] = React.useState(false);
   const [showSignUp, setShowSignUp] = React.useState(false);
@@ -28,6 +29,7 @@ function App() {
   const [showCards, setShowCards] = React.useState(false);
   const [showInputError, setShowInputError] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
+  const [isIconActive, setIsIconActive] = React.useState(false);
 
   useEffect(() => {
     signInOpen
@@ -78,6 +80,14 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const handleMenu = () => {
+    setMenuOpen(true);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
+
   const switchTheme = () => {
     changeTheme(true);
   };
@@ -103,6 +113,8 @@ function App() {
 
   const handleModalLogin = () => {
     setSignInOpen(true);
+    setMenuOpen(false);
+    setIsIconActive(false);
   };
 
   const handleShowSignUp = (e) => {
@@ -143,7 +155,17 @@ function App() {
           theme={theme}
           changeTheme={toggleTheme}
           setTheme={switchTheme}
+          signInOpen={signInOpen}
+          handleMenu={handleMenu}
+          handleMenuClose={handleMenuClose}
+          isIconActive={isIconActive}
+          setIsIconActive={setIsIconActive}
         />
+        {isMenuOpen ? (
+          <Menu handleLogin={handleModalLogin} isLoggedIn={isLoggedin} />
+        ) : (
+          ``
+        )}
         <Switch>
           <Route path="/saved-news">
             <SavedNews theme={theme} changeTheme={switchTheme} />

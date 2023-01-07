@@ -55,7 +55,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 520px) {
   .about {
     display: flex;
     flex-flow: column wrap;

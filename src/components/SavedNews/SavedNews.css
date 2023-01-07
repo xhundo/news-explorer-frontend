@@ -18,7 +18,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 520px) {
   .saved-news__content {
     justify-content: center;
     margin: 0 16px 12px 16px;

@@ -134,7 +134,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 520px) {
   .search__heading {
     margin: 30px 16px 16px 16px;
     width: 285px;
@@ -146,7 +146,7 @@
   }
 
   .search__form {
-    margin-bottom: 32px;
+    margin-bottom: 19px;
   }
 
   .search-form__input {
