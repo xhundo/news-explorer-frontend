@@ -162,7 +162,13 @@ function App() {
           setIsIconActive={setIsIconActive}
         />
         {isMenuOpen ? (
-          <Menu handleLogin={handleModalLogin} isLoggedIn={isLoggedin} />
+          <Menu
+            handleLogin={handleModalLogin}
+            isLoggedIn={isLoggedin}
+            toggleTheme={toggleTheme}
+            setLogin={handleLogin}
+            theme={theme}
+          />
         ) : (
           ``
         )}

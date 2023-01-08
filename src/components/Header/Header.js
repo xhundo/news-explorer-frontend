@@ -29,7 +29,17 @@ function Header({
   };
 
   return (
-    <header className={theme ? `header__switch` : `header`}>
+    <header
+      className={
+        theme
+          ? isIconActive
+            ? `header__switch-fixed`
+            : `header__switch`
+          : isIconActive
+          ? `header__fixed`
+          : `header`
+      }
+    >
       <Link to={'/'}>
         <p
           onClick={changeTheme}
@@ -48,7 +58,11 @@ function Header({
         <div
           className={
             theme
-              ? `header-custom__bar1-dark`
+              ? `header-custom__bar1-dark ${
+                  isIconActive
+                    ? `header-custom__bar1_change`
+                    : `header-custom__bar1-dark`
+                }`
               : signInOpen
               ? ``
               : `header-custom__bar1 ${
@@ -61,7 +75,11 @@ function Header({
         <div
           className={
             theme
-              ? `header-custom__bar2-dark`
+              ? `header-custom__bar2-dark ${
+                  isIconActive
+                    ? `header-custom__bar2_change`
+                    : `header-custom__bar2-dark`
+                }`
               : signInOpen
               ? ``
               : `header-custom__bar2 ${
