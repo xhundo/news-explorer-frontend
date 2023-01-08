@@ -158,6 +158,11 @@
     margin-bottom: 0;
   }
 
+  .search__form-error {
+    margin: 0;
+    font-size: 14px;
+  }
+
   .search__input {
     width: 288px;
     margin-bottom: 16px;
