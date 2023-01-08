@@ -1,10 +1,14 @@
 import './Menu.css';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Menu({ handleLogin, isLoggedIn, toggleTheme, setLogin, theme }) {
   const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    toggleTheme();
+  }, [isLoggedIn]);
 
   return (
     <div className="menu">

@@ -10,6 +10,7 @@ import SignInModal from '../SignInModal/SignInModal';
 import SavedNews from '../SavedNews/SavedNews';
 import { searchNews } from '../../utils/ThirdPartyApi';
 import Menu from '../Menu/Menu';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [user, setUser] = React.useState({
@@ -161,21 +162,11 @@ function App() {
           isIconActive={isIconActive}
           setIsIconActive={setIsIconActive}
         />
-        {isMenuOpen ? (
-          <Menu
-            handleLogin={handleModalLogin}
-            isLoggedIn={isLoggedin}
-            toggleTheme={toggleTheme}
-            setLogin={handleLogin}
-            theme={theme}
-          />
-        ) : (
-          ``
-        )}
+
         <Switch>
-          <Route path="/saved-news">
+          <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedin}>
             <SavedNews theme={theme} changeTheme={switchTheme} />
-          </Route>
+          </ProtectedRoute>
           <Route path="/">
             <Main
               isLoggedIn={isLoggedin}
@@ -206,6 +197,15 @@ function App() {
           handleCloseByEsc={handleCloseByEsc}
           handleTarget={handleCloseByTarget}
         />
+        {isMenuOpen && (
+          <Menu
+            handleLogin={handleModalLogin}
+            isLoggedIn={isLoggedin}
+            toggleTheme={toggleTheme}
+            setLogin={handleLogin}
+            theme={theme}
+          />
+        )}
       </div>
     </CurrentUserContext.Provider>
   );
