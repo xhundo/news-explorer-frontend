@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -15,6 +15,7 @@ function Header({
   isIconActive,
   setIsIconActive,
   signInOpen,
+  handleLogin,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -27,6 +28,10 @@ function Header({
       handleMenuClose();
     }
   };
+
+  useEffect(() => {
+    changeTheme();
+  }, [isLoggedin]);
 
   return (
     <header
@@ -114,6 +119,7 @@ function Header({
             <div className={theme ? `header__log-switch` : `header__nav-log`}>
               <p className="header__user">{currentUser.name}</p>
               <button
+                onClick={handleLogin}
                 className={
                   theme ? `header__logout-switch` : `header__nav-logout`
                 }

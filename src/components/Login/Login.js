@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import './SignInModal.css';
+import './Login.css';
 
-function SignInModal({
+function Login({
   modalOpen,
   handleClose,
   handleSignUp,
@@ -13,6 +13,10 @@ function SignInModal({
   handleSignupComplete,
   revertSignUp,
   handleTarget,
+  handleSubmit,
+  handleLogin,
+  handleAuth,
+  handleModal,
 }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -36,6 +40,18 @@ function SignInModal({
     setUsername(e.target.value);
   };
 
+  const handleUserLogin = (e) => {
+    e.preventDefault();
+    handleSubmit(email, password)
+      .then(() => {
+        setEmail('');
+        setPassword('');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <ModalWithForm
       isOpen={modalOpen}
@@ -48,6 +64,7 @@ function SignInModal({
           ? `Sign up`
           : `Sign in`
       }
+      handleSubmit={handleUserLogin}
       selector={'signin__modal-button'}
       close={handleClose}
       handleOptions={handleSignUp}
@@ -65,15 +82,13 @@ function SignInModal({
           <label className="signin__label-email">Email</label>
           <input
             required
-            type="text"
             value={email}
+            type="email"
             onChange={(e) => handleEmail(e)}
             placeholder="Enter email"
             className="signin__input-email"
           />
-          <label required className="signin__label-password">
-            Password
-          </label>
+          <label className="signin__label-password">Password</label>
           <input
             value={password}
             onChange={(e) => handlePassword(e)}
@@ -111,4 +126,4 @@ function SignInModal({
   );
 }
 
-export default SignInModal;
+export default Login;

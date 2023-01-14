@@ -6,17 +6,20 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
-import SignInModal from '../SignInModal/SignInModal';
+import Login from '../Login/Login';
 import SavedNews from '../SavedNews/SavedNews';
 import { searchNews } from '../../utils/ThirdPartyApi';
 import Menu from '../Menu/Menu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Api from '../../utils/MainApi';
+import { baseUrl } from '../../utils/constants';
 
 function App() {
   const [user, setUser] = React.useState({
-    name: 'Elise',
+    name: '',
+    _id: '',
   });
-  const [isLoggedin, setIsLoggedIn] = React.useState(true);
+  const [isLoggedin, setIsLoggedIn] = React.useState(false);
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [theme, changeTheme] = React.useState(false);
   const [signInOpen, setSignInOpen] = React.useState(false);
@@ -31,6 +34,15 @@ function App() {
   const [showInputError, setShowInputError] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
   const [isIconActive, setIsIconActive] = React.useState(false);
+
+  const apiFetch = new Api({
+    baseUrl,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 
   useEffect(() => {
     signInOpen
@@ -51,6 +63,20 @@ function App() {
   useEffect(() => {
     isLoading && setSearchComplete(false);
   }, [isLoading]);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      handleLogged();
+      apiFetch
+        .getCurrentUser()
+        .then((res) => {
+          setUser({ name: res?.data?.name, _id: res?.data?._id });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [isLoggedin]);
 
   const getSearch = (search) => {
     setShowInputError(false);
@@ -77,8 +103,26 @@ function App() {
       });
   };
 
+  const handleSignIn = async (email, password) => {
+    apiFetch
+      .loginUser(email, password)
+      .then(() => {
+        setSignInOpen(false);
+        handleLogged(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        handleLogin();
+      });
+  };
+
   const handleLogin = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem('token');
+  };
+
+  const handleLogged = () => {
+    setIsLoggedIn(true);
   };
 
   const handleMenu = () => {
@@ -161,6 +205,7 @@ function App() {
           handleMenuClose={handleMenuClose}
           isIconActive={isIconActive}
           setIsIconActive={setIsIconActive}
+          handleLogin={handleLogin}
         />
 
         <Switch>
@@ -185,7 +230,7 @@ function App() {
           </Route>
         </Switch>
         <Footer changeTheme={toggleTheme} />
-        <SignInModal
+        <Login
           modalOpen={signInOpen}
           handleClose={handleClose}
           showSignUp={showSignUp}
@@ -196,6 +241,10 @@ function App() {
           revertSignUp={revertSignUp}
           handleCloseByEsc={handleCloseByEsc}
           handleTarget={handleCloseByTarget}
+          handleSubmit={handleSignIn}
+          handleLogin={handleLogged}
+          handleAuth={handleLogin}
+          handleModal={handleModalLogin}
         />
         {isMenuOpen && (
           <Menu

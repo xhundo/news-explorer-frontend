@@ -32,11 +32,7 @@ function ModalWithForm({
             : `modal__content`
         }
       >
-        <form
-          onSubmit={handleSignUpComplete}
-          className="modal__form"
-          noValidate
-        >
+        <form onSubmit={handleSubmit} className="modal__form" noValidate>
           <h2
             className={
               signUpComplete ? `modal__title-complete` : `modal__title`
@@ -48,7 +44,7 @@ function ModalWithForm({
           {signUpComplete ? (
             ``
           ) : (
-            <button type="submit" disabled={disabled} className={selector}>
+            <button type="submit" className={selector}>
               {buttonTxt}
             </button>
           )}
