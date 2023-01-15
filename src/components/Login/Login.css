@@ -23,13 +23,22 @@
 .signin__input-email {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 36px 31px 36px;
+  margin: 0 36px 0px 36px;
   padding: 0 0 10px 0;
   background-color: transparent;
   background-clip: text;
 }
 
 .signin__input-password {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 36px 0 36px;
+  background-color: transparent;
+  background-clip: text;
+  padding: 0 0 10px 0;
+}
+
+.login__input-username {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 36px 39px 36px;
@@ -47,10 +56,22 @@
   padding: 0 0 10px 0;
 }
 
+.login__input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.login__input-password {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 43px;
+}
+
 .signin__modal-button {
   background: #2f71e5;
   width: 360px;
-  height: 64px;
+  min-height: 64px;
   margin: 0 35px 16px 36px;
   color: #fff;
   font-family: 'Roboto';
@@ -63,6 +84,21 @@
   border-radius: 100px;
   cursor: pointer;
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+}
+
+.signin__modal-button:disabled {
+  background: #e6e8eb;
+  transition: 0.2s ease-in-out;
+}
+
+.signin__input-error {
+  color: red;
+  font-family: 'Inter';
+  font-size: 12px;
+  margin: 3px 0 0 35px;
+  max-height: 100%;
+  width: 358px;
+  box-sizing: content-box;
 }
 
 .signin__input-email::placeholder {

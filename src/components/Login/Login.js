@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './Login.css';
+import { useFormValidator } from '../FormValidator/FormValidator';
 
 function Login({
   modalOpen,
@@ -18,35 +19,26 @@ function Login({
   handleAuth,
   handleModal,
 }) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [username, setUsername] = React.useState('');
+  const {
+    email,
+    password,
+    username,
+    handleChange,
+    errors,
+    handlePasswordChange,
+    handleUsernameChange,
+    isValid,
+    resetForm,
+  } = useFormValidator();
 
   useEffect(() => {
-    setEmail('');
-    setPassword('');
-    setUsername('');
+    resetForm('', null, false);
   }, [modalOpen, revertOptions]);
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
 
   const handleUserLogin = (e) => {
     e.preventDefault();
     handleSubmit(email, password)
-      .then(() => {
-        setEmail('');
-        setPassword('');
-      })
+      .then(() => {})
       .catch((e) => {
         console.log(e);
       });
@@ -74,30 +66,53 @@ function Login({
       handleSignUpComplete={handleSignupComplete}
       revertSignUp={revertSignUp}
       closeByTarget={handleTarget}
+      isValid={isValid}
     >
       {signUpComplete ? (
         ``
       ) : (
         <>
           <label className="signin__label-email">Email</label>
-          <input
-            required
-            value={email}
-            type="email"
-            onChange={(e) => handleEmail(e)}
-            placeholder="Enter email"
-            className="signin__input-email"
-          />
+          <div className="login__input">
+            <input
+              required
+              value={email}
+              type="email"
+              onChange={handleChange}
+              placeholder="Enter email"
+              className="signin__input-email"
+            />
+            <span className="signin__input-error">{errors?.email}</span>
+          </div>
           <label className="signin__label-password">Password</label>
-          <input
-            value={password}
-            onChange={(e) => handlePassword(e)}
-            type="password"
-            placeholder="Enter password"
-            className={
-              showSignUp ? `signin__input-signup` : `signin__input-password`
-            }
-          />
+          {showSignUp ? (
+            <input
+              value={password}
+              onChange={handlePasswordChange}
+              type="password"
+              placeholder="Enter password"
+              minLength="2"
+              maxLength="30"
+              className={
+                showSignUp ? `signin__input-signup` : `signin__input-password`
+              }
+            />
+          ) : (
+            <div className="login__input-password">
+              <input
+                value={password}
+                onChange={handlePasswordChange}
+                type="password"
+                placeholder="Enter password"
+                minLength="2"
+                maxLength="30"
+                className={
+                  showSignUp ? `signin__input-signup` : `signin__input-password`
+                }
+              />
+              <span className="signin__input-error">{errors?.password}</span>
+            </div>
+          )}
         </>
       )}
       {signUpComplete ? (
@@ -111,11 +126,12 @@ function Login({
               </label>
               <input
                 value={username}
-                onChange={(e) => handleUsername(e)}
+                onChange={handleUsernameChange}
                 type="text"
                 placeholder="Enter your username"
-                className="signin__input-password"
+                className="login__input-username"
               />
+              <span className="signin__input-error">{errors?.username}</span>
             </div>
           ) : (
             ``

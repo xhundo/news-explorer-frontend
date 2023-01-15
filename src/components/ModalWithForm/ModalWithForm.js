@@ -17,6 +17,7 @@ function ModalWithForm({
   handleSignUpComplete,
   handleSubmit,
   revertSignUp,
+  isValid,
 }) {
   return (
     <div
@@ -44,7 +45,7 @@ function ModalWithForm({
           {signUpComplete ? (
             ``
           ) : (
-            <button type="submit" className={selector}>
+            <button disabled={!isValid} type="submit" className={selector}>
               {buttonTxt}
             </button>
           )}

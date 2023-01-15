@@ -21,7 +21,7 @@ function NewsCardList({
               <NewsCard
                 isSaved={isSaved}
                 handleSaved={handleSaved}
-                key={card?.author}
+                key={card?.content}
                 card={card}
                 isLoggedIn={isLoggedIn}
               />
@@ -30,7 +30,7 @@ function NewsCardList({
               <NewsCard
                 isSaved={isSaved}
                 handleSaved={handleSaved}
-                key={card?.author}
+                key={card?.content}
                 card={card}
                 isLoggedIn={isLoggedIn}
               />
