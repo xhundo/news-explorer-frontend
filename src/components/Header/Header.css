@@ -179,7 +179,7 @@ a {
   justify-content: space-between;
   align-items: center;
   margin: 19px 104px 13px 0;
-  width: 112px;
+  min-width: 112px;
   height: 48px;
   background-color: transparent;
   border: 1px solid #ffff;
@@ -227,7 +227,7 @@ a {
 }
 
 .header__user {
-  margin: 0;
+  margin: 0 2px 0 0;
 }
 
 .header__menu {

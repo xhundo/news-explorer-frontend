@@ -16,14 +16,15 @@ class Api {
   };
 
   createUser = (email, password, name) => {
-    return fetch(`${this.baseUrl}/users`, {
+    return fetch(`${this.baseUrl}/signup`, {
+      method: 'POST',
       headers: this.headers,
       body: JSON.stringify({ email, password, name }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      Promise.reject(`Error: ${res.status}`);
+      throw new Error(`Error: ${res.status}`);
     });
   };
 

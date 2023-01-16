@@ -16,6 +16,7 @@ function Header({
   setIsIconActive,
   signInOpen,
   handleLogin,
+  isSignUpOpen,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -51,7 +52,7 @@ function Header({
           className={
             theme
               ? `header__logo-switch`
-              : signInOpen
+              : signInOpen || isSignUpOpen
               ? `header__logo-none`
               : `header__logo`
           }
@@ -68,7 +69,7 @@ function Header({
                     ? `header-custom__bar1_change`
                     : `header-custom__bar1-dark`
                 }`
-              : signInOpen
+              : signInOpen || isSignUpOpen
               ? ``
               : `header-custom__bar1 ${
                   isIconActive
@@ -85,7 +86,7 @@ function Header({
                     ? `header-custom__bar2_change`
                     : `header-custom__bar2-dark`
                 }`
-              : signInOpen
+              : signInOpen || isSignUpOpen
               ? ``
               : `header-custom__bar2 ${
                   isIconActive

@@ -13,6 +13,8 @@ import Menu from '../Menu/Menu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Api from '../../utils/MainApi';
 import { baseUrl } from '../../utils/constants';
+import Register from '../Register/Register';
+import RegisterSuccess from '../SignUpComplete/RegisterSuccess';
 
 function App() {
   const [user, setUser] = React.useState({
@@ -34,7 +36,8 @@ function App() {
   const [showInputError, setShowInputError] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
   const [isIconActive, setIsIconActive] = React.useState(false);
-
+  const [isSignUpOpen, setSignUpOpen] = React.useState(false);
+  const [showApiError, setShowApiError] = React.useState(false);
   const apiFetch = new Api({
     baseUrl,
     headers: {
@@ -45,7 +48,7 @@ function App() {
   });
 
   useEffect(() => {
-    signInOpen
+    signInOpen || isSignUpOpen
       ? document.addEventListener('keydown', handleCloseByEsc)
       : document.removeEventListener('keydown', handleCloseByEsc);
   });
@@ -78,6 +81,47 @@ function App() {
     }
   }, [isLoggedin]);
 
+  const openRegisterModal = (e) => {
+    e.preventDefault();
+    setSignInOpen(false);
+    setSignUpOpen(true);
+  };
+
+  const switchModal = (e) => {
+    e.preventDefault();
+    setSignUpOpen(false);
+    setSignInOpen(true);
+  };
+
+  const handleSignIn = async (email, password) => {
+    apiFetch
+      .loginUser(email, password)
+      .then(() => {
+        setSignInOpen(false);
+        handleLogged(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        handleLogin();
+      });
+  };
+
+  const handleUserSignUp = async (email, password, username) => {
+    setShowApiError(false);
+    apiFetch
+      .createUser(email, password, username)
+      .then(() => {
+        setSignUpOpen(false);
+        setSignUpComplete(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        e.message === `Error: 409` && setShowApiError(true);
+        setSignUpOpen(true);
+        setSignUpComplete(false);
+      });
+  };
+
   const getSearch = (search) => {
     setShowInputError(false);
     setIsLoading(true);
@@ -100,19 +144,6 @@ function App() {
           setIsLoading(false);
           setShowError(true);
         }
-      });
-  };
-
-  const handleSignIn = async (email, password) => {
-    apiFetch
-      .loginUser(email, password)
-      .then(() => {
-        setSignInOpen(false);
-        handleLogged(true);
-      })
-      .catch((e) => {
-        console.log(e);
-        handleLogin();
       });
   };
 
@@ -154,6 +185,7 @@ function App() {
     setSignInOpen(false);
     setShowSignUp(false);
     setSignUpComplete(false);
+    setSignUpOpen(false);
   };
 
   const handleModalLogin = () => {
@@ -172,9 +204,13 @@ function App() {
     setShowSignUp(false);
   };
 
-  const handleSignupComplete = (e) => {
-    e.preventDefault();
+  const handleSignupComplete = () => {
+    setSignUpOpen(false);
     setSignUpComplete(true);
+  };
+
+  const handleComplete = () => {
+    setSignUpComplete(false);
   };
 
   const revertSignUp = (e) => {
@@ -184,11 +220,32 @@ function App() {
   };
 
   const handleCloseByEsc = (e) => {
-    e.key === 'Escape' && setSignInOpen(false);
+    if (e.key === 'Escape') {
+      setSignInOpen(false);
+      setSignUpOpen(false);
+    }
   };
 
   const handleCloseByTarget = (e) => {
-    e.target === e.currentTarget && setSignInOpen(false);
+    if (e.target === e.currentTarget) {
+      setSignInOpen(false);
+      setSignUpOpen(false);
+      setSignUpComplete(false);
+    }
+  };
+
+  const toggleApiError = () => {
+    setShowApiError(false);
+  };
+
+  const toggleOpen = () => {
+    setSignUpOpen(true);
+  };
+
+  const toggleSignInComplete = (e) => {
+    e.preventDefault();
+    setSignUpComplete(false);
+    setSignInOpen(true);
   };
 
   return (
@@ -206,6 +263,7 @@ function App() {
           isIconActive={isIconActive}
           setIsIconActive={setIsIconActive}
           handleLogin={handleLogin}
+          isSignUpOpen={isSignUpOpen}
         />
 
         <Switch>
@@ -245,6 +303,19 @@ function App() {
           handleLogin={handleLogged}
           handleAuth={handleLogin}
           handleModal={handleModalLogin}
+          handleRegister={openRegisterModal}
+        />
+        <Register
+          modalOpen={isSignUpOpen}
+          close={handleClose}
+          handleCloseByTarget={handleCloseByTarget}
+          handleCreateUser={handleUserSignUp}
+          handleComplete={handleSignupComplete}
+          modalSwitch={switchModal}
+          handleSignComplete={handleComplete}
+          toggleOpen={toggleOpen}
+          apiError={showApiError}
+          resetApiError={toggleApiError}
         />
         {isMenuOpen && (
           <Menu
@@ -255,6 +326,12 @@ function App() {
             theme={theme}
           />
         )}
+        <RegisterSuccess
+          completeOpen={signUpComplete}
+          close={handleClose}
+          closeByTarget={handleCloseByTarget}
+          toggleBtn={toggleSignInComplete}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
