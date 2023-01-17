@@ -1,15 +1,32 @@
 import './NewsCard.css';
 
-function NewsCard({ isLoggedIn, card, handleSaved, isSaved }) {
+function NewsCard({ isLoggedIn, card, handleSaved, isSaved, addCard }) {
   const currentDate = new Date(card?.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
   });
 
+  const createSaveCard = () => {
+    handleSaveCard(
+      card?.keyword,
+      card?.title,
+      card?.description,
+      currentDate,
+      card?.source?.name,
+      card?.url,
+      card?.urlToImage,
+    );
+  };
 
+  const handleSaveCard = (keyword, title, text, date, source, link, image) => {
+    addCard(keyword, title, text, date, source, link, image);
+  };
 
-  const savedCard = isSaved ? `newscard__btn-saved` : `newscard__save-btn`;
+  const savedCard =
+    isSaved && isLoggedIn === true
+      ? `newscard__btn-saved`
+      : `newscard__save-btn`;
 
   return (
     <div className="newscard">
@@ -20,7 +37,7 @@ function NewsCard({ isLoggedIn, card, handleSaved, isSaved }) {
         <article className="newscard__paragraph">{card?.description}</article>
         <p className="newscard__topic">{card?.source?.name}</p>
         <button
-          onClick={handleSaved}
+          onClick={createSaveCard}
           disabled={!isLoggedIn}
           className={savedCard}
         ></button>

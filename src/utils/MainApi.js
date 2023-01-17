@@ -47,5 +47,44 @@ class Api {
         }
       });
   };
+
+  getArticles = () => {
+    return fetch(`${this.baseUrl}/articles`, {
+      method: 'GET',
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        Promise.reject(`Error: ${res.status}`);
+      }
+    });
+  };
+
+  deleteArticle = (id) => {
+    return fetch(`${this.baseUrl}/articles/${id}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      Promise.reject(`Error: ${res.status}`);
+    });
+  };
+
+  createArticle = (keyword, title, text, date, source, link, image) => {
+    return fetch(`${this.baseUrl}/articles`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({ keyword, title, text, date, source, link, image }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        Promise.reject(`Error: ${res.status}`);
+      }
+    });
+  };
 }
 export default Api;

@@ -70,7 +70,7 @@
   text-align: left;
 }
 
-.modal__title-complete {
+/* .modal__title-complete {
   margin: 34px 0 14px 36px;
   font-family: 'Roboto';
   font-size: 24px;
@@ -78,7 +78,7 @@
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
-}
+} */
 
 .modal__close-btn {
   position: absolute;
@@ -158,7 +158,8 @@
     height: 89vh;
   }
 
-  .modal__title-complete {
+  .modal__title {
+    width: 100%;
     margin-right: 16px;
   }
 

@@ -38,6 +38,7 @@ function App() {
   const [isIconActive, setIsIconActive] = React.useState(false);
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState(false);
+  const [savedCard, setSavedCard] = React.useState([]);
   const apiFetch = new Api({
     baseUrl,
     headers: {
@@ -79,7 +80,20 @@ function App() {
           console.log(e);
         });
     }
+    // eslint-disable-next-line
   }, [isLoggedin]);
+
+  useEffect(() => {
+    apiFetch
+      .getArticles()
+      .then((data) => {
+        const articles = data[0]?.articles;
+        setSavedCard(articles);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   const openRegisterModal = (e) => {
     e.preventDefault();
@@ -122,6 +136,30 @@ function App() {
       });
   };
 
+  const saveCard = (keyword, title, text, date, source, link, image) => {
+    apiFetch
+      .createArticle(keyword, title, text, date, source, link, image)
+      .then((res) => {
+        let saved = res[0]?.data;
+        setSavedCard([...savedCard, saved]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const removeCard = (id) => {
+    apiFetch
+      .deleteArticle(id)
+      .then((data) => {
+        const deletedCard = data[0]?.articles;
+        setSavedCard((c) => c.filter((c) => c._id !== deletedCard._id));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   const getSearch = (search) => {
     setShowInputError(false);
     setIsLoading(true);
@@ -131,7 +169,9 @@ function App() {
       .then((data) => {
         setIsLoading(false);
         setSearchComplete(true);
-        setCard(data?.articles);
+        const searchedCard = data?.articles;
+        addKeyword(searchedCard, search);
+        setCard(searchedCard);
         localStorage.setItem('articles', JSON.stringify(data?.articles));
       })
       .catch((e) => {
@@ -145,6 +185,10 @@ function App() {
           setShowError(true);
         }
       });
+  };
+
+  const addKeyword = (newCards, keyword) => {
+    newCards.forEach((card) => (card.keyword = keyword));
   };
 
   const handleLogin = () => {
@@ -268,7 +312,12 @@ function App() {
 
         <Switch>
           <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedin}>
-            <SavedNews theme={theme} changeTheme={switchTheme} />
+            <SavedNews
+              theme={theme}
+              changeTheme={switchTheme}
+              cards={savedCard}
+              deleteCard={removeCard}
+            />
           </ProtectedRoute>
           <Route path="/">
             <Main
@@ -277,6 +326,7 @@ function App() {
               searchComplete={searchComplete}
               getSearch={getSearch}
               cards={card}
+              addCard={saveCard}
               recentSearch={recentSearch}
               toggleShowCards={handleShowCards}
               showCards={showCards}

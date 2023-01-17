@@ -127,12 +127,16 @@
   .register__button {
     width: 288px;
     height: 64px;
-    margin: 23px 16px 16px 16px;
+    margin: 16px 16px 16px 16px;
     align-self: center;
   }
 
   .register__input-error {
     max-height: 100%;
     width: 246px;
+  }
+
+  .register__error {
+    margin-bottom: 0;
   }
 }

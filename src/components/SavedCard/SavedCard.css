@@ -1,7 +1,7 @@
 .savedcard {
   position: relative;
   max-width: 400px;
-  max-height: 576px;
+  max-height: 100%;
   background-color: #fff;
   border-radius: 16px;
   overflow: hidden;
@@ -19,6 +19,10 @@
 
 .savedcard__content {
   margin: 0 24px 24px 24px;
+}
+
+.savedcard-img {
+  width: 400px;
 }
 
 .savedcard__date {
@@ -149,6 +153,11 @@
 
   .savedcard__title {
     width: 192px;
+  }
+
+  .savedcard__trash-btn:hover + .savedcard__topic-remove {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 

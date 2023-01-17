@@ -19,6 +19,7 @@ function Main({
   showError,
   handleSaved,
   isSaved,
+  addCard,
 }) {
   return (
     <main className="main">
@@ -33,6 +34,7 @@ function Main({
           toggleShowCards={toggleShowCards}
           handleSaved={handleSaved}
           isSaved={isSaved}
+          addCard={addCard}
         />
       ) : (
         ``
@@ -44,6 +46,7 @@ function Main({
           showCards={showCards}
           toggleShowCards={toggleShowCards}
           isSaved={isSaved}
+          addCard={addCard}
         />
       ) : (
         ``

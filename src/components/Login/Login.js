@@ -15,9 +15,6 @@ function Login({
   revertSignUp,
   handleTarget,
   handleSubmit,
-  handleLogin,
-  handleAuth,
-  handleModal,
   handleRegister,
 }) {
   const {
