@@ -23,6 +23,7 @@
 
 .savedcard-img {
   width: 400px;
+  height: 272px;
 }
 
 .savedcard__date {
@@ -65,7 +66,7 @@
   text-align: left;
   color: rgba(182, 188, 191, 1);
   text-transform: uppercase;
-  margin: 18px 0 0 0;
+  margin: 18px 0 24px 0;
 }
 
 .savedcard__trash-btn {

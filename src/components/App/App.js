@@ -1,6 +1,6 @@
 import '../App/App.css';
 import '../../vendor/fonts/fonts.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
@@ -39,6 +39,7 @@ function App() {
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState(false);
   const [savedCard, setSavedCard] = React.useState([]);
+  const [ownerCards, setOwnerCard] = React.useState([]);
   const apiFetch = new Api({
     baseUrl,
     headers: {
@@ -87,13 +88,14 @@ function App() {
     apiFetch
       .getArticles()
       .then((data) => {
-        const articles = data[0]?.articles;
-        setSavedCard(articles);
+        let articles = data[0]?.articles;
+        const ownerArticle = articles.filter((c) => user._id === c?.owner);
+        setSavedCard(ownerArticle);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [savedCard]);
 
   const openRegisterModal = (e) => {
     e.preventDefault();
