@@ -1,6 +1,6 @@
 import '../App/App.css';
 import '../../vendor/fonts/fonts.css';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
@@ -30,7 +30,7 @@ function App() {
   const [searchComplete, setSearchComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
-  const [card, setCard] = React.useState([]);
+  const [card, setCard] = React.useState([{}]);
   const [recentSearch, setRecentSearch] = React.useState(false);
   const [showCards, setShowCards] = React.useState(false);
   const [showInputError, setShowInputError] = React.useState(false);
@@ -39,7 +39,7 @@ function App() {
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState(false);
   const [savedCard, setSavedCard] = React.useState([]);
-  const [ownerCards, setOwnerCard] = React.useState([]);
+  const [recentSaves, setRecentSaves] = React.useState([{}]);
   const apiFetch = new Api({
     baseUrl,
     headers: {
@@ -61,7 +61,7 @@ function App() {
       setCard(data);
       setRecentSearch(true);
     } else {
-      setCard([].length === null);
+      setCard([]);
     }
   }, []);
 
@@ -90,12 +90,16 @@ function App() {
       .then((data) => {
         let articles = data[0]?.articles;
         const ownerArticle = articles.filter((c) => user._id === c?.owner);
+        ownerArticle.forEach((card) => {
+          card.saved = true;
+        });
         setSavedCard(ownerArticle);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [savedCard]);
+    // eslint-disable-next-line
+  }, [user]);
 
   const openRegisterModal = (e) => {
     e.preventDefault();
@@ -142,8 +146,17 @@ function App() {
     apiFetch
       .createArticle(keyword, title, text, date, source, link, image)
       .then((res) => {
-        let saved = res[0]?.data;
-        setSavedCard([...savedCard, saved]);
+        const card = res[0]?.data;
+        card.saved = true;
+        const recentCards = [];
+        recentCards.push(...savedCard, card);
+        localStorage.setItem(
+          'cards',
+          JSON.stringify({
+            recentCards,
+          }),
+        );
+        setSavedCard([...savedCard, card]);
       })
       .catch((e) => {
         console.log(e);
@@ -173,8 +186,9 @@ function App() {
         setSearchComplete(true);
         const searchedCard = data?.articles;
         addKeyword(searchedCard, search);
+        isCardSaved(searchedCard);
         setCard(searchedCard);
-        localStorage.setItem('articles', JSON.stringify(data?.articles));
+        localStorage.setItem('articles', JSON.stringify(searchedCard));
       })
       .catch((e) => {
         if (e.message === 'Search not found') {
@@ -191,6 +205,10 @@ function App() {
 
   const addKeyword = (newCards, keyword) => {
     newCards.forEach((card) => (card.keyword = keyword));
+  };
+
+  const isCardSaved = (card) => {
+    card.forEach((card) => (card.saved = false));
   };
 
   const handleLogin = () => {
@@ -327,6 +345,7 @@ function App() {
               isLoading={isLoading}
               searchComplete={searchComplete}
               getSearch={getSearch}
+              savedCard={savedCard}
               cards={card}
               addCard={saveCard}
               recentSearch={recentSearch}

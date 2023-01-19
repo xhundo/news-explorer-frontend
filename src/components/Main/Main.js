@@ -17,8 +17,8 @@ function Main({
   recentSearch,
   showInputError,
   showError,
-  handleSaved,
   isSaved,
+  savedCard,
   addCard,
 }) {
   return (
@@ -28,11 +28,11 @@ function Main({
       {isLoading && cards.length !== 0 && !showInputError ? <Preloader /> : ``}
       {recentSearch && cards.length !== 0 ? (
         <NewsCardList
+          savedCard={savedCard}
           isLoggedIn={isLoggedIn}
           cards={cards}
           showCards={showCards}
           toggleShowCards={toggleShowCards}
-          handleSaved={handleSaved}
           isSaved={isSaved}
           addCard={addCard}
         />
@@ -43,6 +43,7 @@ function Main({
         <NewsCardList
           isLoggedIn={isLoggedIn}
           cards={cards}
+          savedCard={savedCard}
           showCards={showCards}
           toggleShowCards={toggleShowCards}
           isSaved={isSaved}

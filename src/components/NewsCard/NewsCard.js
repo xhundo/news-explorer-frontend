@@ -1,11 +1,21 @@
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './NewsCard.css';
 
-function NewsCard({ isLoggedIn, card, handleSaved, isSaved, addCard }) {
+function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
   const currentDate = new Date(card?.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
   });
+
+  const [hasSaved, setHasSaved] = useState(false);
+
+  // console.log(localStorage.getItem('cards'));
+
+  useEffect(() => {
+    if (savedCard.forEach((card) => {}));
+  }, [card]);
 
   const createSaveCard = () => {
     handleSaveCard(
@@ -20,11 +30,12 @@ function NewsCard({ isLoggedIn, card, handleSaved, isSaved, addCard }) {
   };
 
   const handleSaveCard = (keyword, title, text, date, source, link, image) => {
+    setHasSaved(true);
     addCard(keyword, title, text, date, source, link, image);
   };
 
-  const savedCard =
-    isSaved && isLoggedIn === true
+  const itemSave =
+    hasSaved && isLoggedIn === true
       ? `newscard__btn-saved`
       : `newscard__save-btn`;
 
@@ -39,7 +50,7 @@ function NewsCard({ isLoggedIn, card, handleSaved, isSaved, addCard }) {
         <button
           onClick={createSaveCard}
           disabled={!isLoggedIn}
-          className={savedCard}
+          className={itemSave}
         ></button>
         {isLoggedIn ? (
           ``

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NewsCard from '../NewsCard/NewsCard';
 import './NewsCardList.css';
 
@@ -6,9 +8,9 @@ function NewsCardList({
   cards,
   toggleShowCards,
   showCards,
-  handleSaved,
   isSaved,
   addCard,
+  savedCard,
 }) {
   const newCards = cards.slice(0, 3);
   const moreCards = cards.slice(0, 6);
@@ -20,8 +22,8 @@ function NewsCardList({
         {showCards
           ? moreCards.map((card) => (
               <NewsCard
+                savedCard={savedCard}
                 isSaved={isSaved}
-                handleSaved={handleSaved}
                 key={card?.content}
                 card={card}
                 isLoggedIn={isLoggedIn}
@@ -30,8 +32,8 @@ function NewsCardList({
             ))
           : newCards.map((card) => (
               <NewsCard
+                savedCard={savedCard}
                 isSaved={isSaved}
-                handleSaved={handleSaved}
                 key={card?.content}
                 card={card}
                 isLoggedIn={isLoggedIn}
