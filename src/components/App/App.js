@@ -185,6 +185,7 @@ function App() {
         setIsLoading(false);
         setSearchComplete(true);
         const searchedCard = data?.articles;
+        searchedCard.forEach((newscard) => (newscard.id = Math.random(1)));
         addKeyword(searchedCard, search);
         isCardSaved(searchedCard);
         setCard(searchedCard);

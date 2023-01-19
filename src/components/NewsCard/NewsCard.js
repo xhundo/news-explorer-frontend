@@ -12,9 +12,16 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
   const [hasSaved, setHasSaved] = useState(false);
 
   // console.log(localStorage.getItem('cards'));
+  const currentSaved = JSON.parse(localStorage.getItem('cards'));
 
   useEffect(() => {
-    if (savedCard.forEach((card) => {}));
+    if (
+      currentSaved.recentCards.some(
+        (savedCard) => savedCard.title === card?.title,
+      )
+    ) {
+      setHasSaved(true);
+    }
   }, [card]);
 
   const createSaveCard = () => {
