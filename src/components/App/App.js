@@ -90,9 +90,6 @@ function App() {
       .then((data) => {
         let articles = data[0]?.articles;
         const ownerArticle = articles.filter((c) => user._id === c?.owner);
-        ownerArticle.forEach((card) => {
-          card.saved = true;
-        });
         setSavedCard(ownerArticle);
       })
       .catch((e) => {
@@ -168,6 +165,11 @@ function App() {
       .deleteArticle(id)
       .then((data) => {
         const deletedCard = data[0]?.articles;
+        const recentSave = JSON.parse(localStorage.getItem('cards'));
+        const recentCards = recentSave.recentCards.filter(
+          (card) => card._id !== deletedCard._id,
+        );
+        localStorage.setItem('cards', JSON.stringify({ recentCards }));
         setSavedCard((c) => c.filter((c) => c._id !== deletedCard._id));
       })
       .catch((e) => {
@@ -185,7 +187,6 @@ function App() {
         setIsLoading(false);
         setSearchComplete(true);
         const searchedCard = data?.articles;
-        searchedCard.forEach((newscard) => (newscard.id = Math.random(1)));
         addKeyword(searchedCard, search);
         isCardSaved(searchedCard);
         setCard(searchedCard);
