@@ -10,6 +10,7 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
   });
 
   const [hasSaved, setHasSaved] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   // console.log(localStorage.getItem('cards'));
   let currentSaved = JSON.parse(localStorage.getItem('cards'));
@@ -24,9 +25,15 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
         )
       ) {
         setHasSaved(true);
+      } else {
+        setHasSaved(false);
       }
     }
-  }, [card]);
+  }, [savedCard]);
+
+  // console.log(savedCard);
+  // console.log(card);
+  // console.log(currentSaved);
 
   const createSaveCard = () => {
     handleSaveCard(
@@ -46,9 +53,7 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
   };
 
   const itemSave =
-    hasSaved && isLoggedIn === true
-      ? `newscard__btn-saved`
-      : `newscard__save-btn`;
+    hasSaved && isLoggedIn ? `newscard__btn-saved` : `newscard__save-btn`;
 
   return (
     <div className="newscard">

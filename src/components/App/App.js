@@ -39,7 +39,6 @@ function App() {
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState(false);
   const [savedCard, setSavedCard] = React.useState([]);
-  const [recentSaves, setRecentSaves] = React.useState([{}]);
   const apiFetch = new Api({
     baseUrl,
     headers: {
@@ -54,16 +53,6 @@ function App() {
       ? document.addEventListener('keydown', handleCloseByEsc)
       : document.removeEventListener('keydown', handleCloseByEsc);
   });
-
-  useEffect(() => {
-    if (localStorage.getItem('articles')) {
-      let data = JSON.parse(localStorage.getItem('articles'));
-      setCard(data);
-      setRecentSearch(true);
-    } else {
-      setCard([]);
-    }
-  }, []);
 
   useEffect(() => {
     isLoading && setSearchComplete(false);
@@ -85,18 +74,36 @@ function App() {
   }, [isLoggedin]);
 
   useEffect(() => {
+    if (localStorage.getItem('articles')) {
+      let data = JSON.parse(localStorage.getItem('articles'));
+      setCard(data);
+      setRecentSearch(true);
+    } else {
+      setCard([]);
+    }
+  }, [isLoggedin, user]);
+
+  useEffect(() => {
     apiFetch
       .getArticles()
       .then((data) => {
         let articles = data[0]?.articles;
         const ownerArticle = articles.filter((c) => user._id === c?.owner);
+        let recentCards = ownerArticle;
+        if (isLoggedin === true) {
+          localStorage.setItem('cards', JSON.stringify({ recentCards }));
+        } else {
+          recentCards = [];
+          localStorage.setItem('cards', JSON.stringify({ recentCards }));
+        }
+
         setSavedCard(ownerArticle);
       })
       .catch((e) => {
         console.log(e);
       });
     // eslint-disable-next-line
-  }, [user]);
+  }, [isLoggedin, user]);
 
   const openRegisterModal = (e) => {
     e.preventDefault();
@@ -188,7 +195,6 @@ function App() {
         setSearchComplete(true);
         const searchedCard = data?.articles;
         addKeyword(searchedCard, search);
-        isCardSaved(searchedCard);
         setCard(searchedCard);
         localStorage.setItem('articles', JSON.stringify(searchedCard));
       })
@@ -207,10 +213,6 @@ function App() {
 
   const addKeyword = (newCards, keyword) => {
     newCards.forEach((card) => (card.keyword = keyword));
-  };
-
-  const isCardSaved = (card) => {
-    card.forEach((card) => (card.saved = false));
   };
 
   const handleLogin = () => {
