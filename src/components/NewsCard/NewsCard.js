@@ -10,30 +10,24 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
   });
 
   const [hasSaved, setHasSaved] = useState(false);
-  const currentUser = useContext(CurrentUserContext);
 
-  // console.log(localStorage.getItem('cards'));
   let currentSaved = JSON.parse(localStorage.getItem('cards'));
 
   useEffect(() => {
-    if (currentSaved.recentCards === undefined) {
-      currentSaved = [];
-    } else if (currentSaved.recentCards !== undefined) {
-      if (
-        currentSaved.recentCards.some(
-          (savedCard) => savedCard.title === card?.title,
-        )
-      ) {
-        setHasSaved(true);
-      } else {
-        setHasSaved(false);
-      }
+    if (
+      currentSaved?.recentCards?.some(
+        (savedCard) => savedCard?.title === card?.title,
+      )
+    ) {
+      setHasSaved(true);
+    } else {
+      setHasSaved(false);
     }
-  }, [savedCard]);
+  }, [isLoggedIn, savedCard]);
 
   // console.log(savedCard);
   // console.log(card);
-  // console.log(currentSaved);
+  console.log(currentSaved);
 
   const createSaveCard = () => {
     handleSaveCard(

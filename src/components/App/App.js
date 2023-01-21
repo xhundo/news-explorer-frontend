@@ -78,8 +78,7 @@ function App() {
       let data = JSON.parse(localStorage.getItem('articles'));
       setCard(data);
       setRecentSearch(true);
-    } else {
-      setCard([]);
+      setSearchComplete(false);
     }
   }, [isLoggedin, user]);
 
@@ -92,12 +91,10 @@ function App() {
         let recentCards = ownerArticle;
         if (isLoggedin === true) {
           localStorage.setItem('cards', JSON.stringify({ recentCards }));
+          setSavedCard(ownerArticle);
         } else {
-          recentCards = [];
-          localStorage.setItem('cards', JSON.stringify({ recentCards }));
+          localStorage.removeItem('cards');
         }
-
-        setSavedCard(ownerArticle);
       })
       .catch((e) => {
         console.log(e);

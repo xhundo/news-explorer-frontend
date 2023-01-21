@@ -26,7 +26,7 @@ function Main({
       <SearchForm showInputError={showInputError} getSearch={getSearch} />
       {cards.length === 0 && <NotFound />}
       {isLoading && cards.length !== 0 && !showInputError ? <Preloader /> : ``}
-      {recentSearch && cards.length !== 0 ? (
+      {recentSearch && (
         <NewsCardList
           savedCard={savedCard}
           isLoggedIn={isLoggedIn}
@@ -36,10 +36,8 @@ function Main({
           isSaved={isSaved}
           addCard={addCard}
         />
-      ) : (
-        ``
       )}
-      {searchComplete && cards.length !== 0 ? (
+      {searchComplete && (
         <NewsCardList
           isLoggedIn={isLoggedIn}
           cards={cards}
@@ -49,8 +47,6 @@ function Main({
           isSaved={isSaved}
           addCard={addCard}
         />
-      ) : (
-        ``
       )}
       {showError && <Error />}
       <About />
