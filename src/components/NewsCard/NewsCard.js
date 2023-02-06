@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './NewsCard.css';
 
-function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
+function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
   const currentDate = new Date(card?.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: '2-digit',
@@ -25,25 +25,35 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
     }
   }, [isLoggedIn, savedCard]);
 
-  // console.log(savedCard);
-  // console.log(card);
-  console.log(currentSaved);
-
-  const createSaveCard = () => {
-    handleSaveCard(
-      card?.keyword,
-      card?.title,
-      card?.description,
-      currentDate,
-      card?.source?.name,
-      card?.url,
-      card?.urlToImage,
-    );
+  const toggleSaved = () => {
+    if (hasSaved === true) {
+      setHasSaved(false);
+      handleDeleteCard(card);
+    } else if (hasSaved === false) {
+      handleSaveCard(
+        card?.keyword,
+        card?.title,
+        card?.description,
+        currentDate,
+        card?.source?.name,
+        card?.url,
+        card?.urlToImage,
+      );
+    }
   };
 
   const handleSaveCard = (keyword, title, text, date, source, link, image) => {
     setHasSaved(true);
     addCard(keyword, title, text, date, source, link, image);
+  };
+
+  const handleDeleteCard = (card) => {
+    currentSaved?.recentCards?.forEach((c) => {
+      if (card.title === c.title) {
+        card._id = c._id;
+        deleteCard(card._id);
+      }
+    });
   };
 
   const itemSave =
@@ -58,7 +68,7 @@ function NewsCard({ isLoggedIn, card, isSaved, addCard, savedCard }) {
         <article className="newscard__paragraph">{card?.description}</article>
         <p className="newscard__topic">{card?.source?.name}</p>
         <button
-          onClick={createSaveCard}
+          onClick={toggleSaved}
           disabled={!isLoggedIn}
           className={itemSave}
         ></button>
