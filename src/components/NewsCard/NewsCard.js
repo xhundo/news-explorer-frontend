@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useEffect, useState } from 'react';
+
 import './NewsCard.css';
 
 function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
