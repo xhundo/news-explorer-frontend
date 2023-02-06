@@ -17,7 +17,7 @@ function Footer({ changeTheme }) {
         <div className="footer__icons">
           <a
             className="footer__icon-git"
-            href="https://github.com/xhundo/news-explorer-frontend.git"
+            href="https://github.com/xhundo"
             alt="Github"
           ></a>
           <a className="footer__icon-facebook" alt="Facebook"></a>
