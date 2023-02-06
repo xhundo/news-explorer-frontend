@@ -1,4 +1,4 @@
-.signin__label-email {
+.login__label-email {
   margin: 0 0 9px 36px;
   color: rgba(47, 113, 229, 1);
   font-family: 'Inter';
@@ -9,7 +9,7 @@
   text-align: left;
 }
 
-.signin__label-password {
+.login__label-password {
   margin: 0 0 8px 36px;
   color: rgba(47, 113, 229, 1);
   font-family: 'Inter';
@@ -20,7 +20,7 @@
   text-align: left;
 }
 
-.signin__input-email {
+.login__input-email {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 36px 0px 36px;
@@ -29,7 +29,7 @@
   background-clip: text;
 }
 
-.signin__input-password {
+.login__input-pass {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 36px 0 36px;
@@ -47,7 +47,7 @@
   padding: 0 0 10px 0;
 }
 
-.signin__input-signup {
+.login__input-signup {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 36px 31px 36px;
@@ -68,7 +68,7 @@
   margin-bottom: 43px;
 }
 
-.signin__modal-button {
+.login__modal-button {
   background: #2f71e5;
   width: 360px;
   min-height: 64px;
@@ -87,12 +87,12 @@
   box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
 }
 
-.signin__modal-button:disabled {
+.login__modal-button:disabled {
   background: #e6e8eb;
   transition: 0.2s ease-in;
 }
 
-.signin__input-error {
+.login__input-error {
   color: red;
   font-family: 'Inter';
   font-size: 12px;
@@ -102,7 +102,7 @@
   box-sizing: content-box;
 }
 
-.signin__input-email::placeholder {
+.login__input-email::placeholder {
   font-family: 'Inter';
   font-size: 14px;
   font-weight: 400;
@@ -112,7 +112,7 @@
   background-color: #fff;
 }
 
-.signin__input-password::placeholder {
+.login__input-password::placeholder {
   font-family: 'Inter';
   font-size: 14px;
   font-weight: 400;
@@ -122,20 +122,20 @@
   background-color: #fff;
 }
 
-.signin__options {
+.login__options {
   display: flex;
   flex-direction: column;
 }
 
 @media screen and (max-width: 520px) {
-  .signin__modal-button {
+  .login__modal-button {
     width: 288px;
     height: 64px;
     margin: 23px 16px 16px 16px;
     align-self: center;
   }
 
-  .signin__input-error {
+  .login__input-error {
     max-height: 100%;
     width: 246px;
   }
