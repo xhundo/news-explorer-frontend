@@ -50,7 +50,7 @@ function Login({
       name={showSignUp ? `signup` : `signin`}
       title={showSignUp ? `Sign up` : `Sign in`}
       handleSubmit={handleUserLogin}
-      selector={'signin__modal-button'}
+      selector={'login__modal-button'}
       close={handleClose}
       handleOptions={handleSignUp}
       showSignUp={showSignUp}
@@ -62,7 +62,7 @@ function Login({
       isValid={isValid}
       nextModal={handleRegister}
     >
-      <label className="signin__label-email">Email</label>
+      <label className="login__label-email">Email</label>
       <div className="login__input">
         <input
           required
@@ -70,11 +70,11 @@ function Login({
           type="email"
           onChange={handleChange}
           placeholder="Enter email"
-          className="signin__input-email"
+          className="login__input-email"
         />
-        <span className="signin__input-error">{errors?.email}</span>
+        <span className="login__input-error">{errors?.email}</span>
       </div>
-      <label className="signin__label-password">Password</label>
+      <label className="login__label-password">Password</label>
       <div className="login__input-password">
         <input
           required
@@ -82,11 +82,9 @@ function Login({
           onChange={handlePasswordChange}
           type="password"
           placeholder="Enter password"
-          className={
-            showSignUp ? `signin__input-signup` : `signin__input-password`
-          }
+          className={showSignUp ? `login__input-signup` : `login__input-pass`}
         />
-        <span className="signin__input-error">{errors?.password}</span>
+        <span className="login__input-error">{errors?.password}</span>
       </div>
     </ModalWithForm>
   );
