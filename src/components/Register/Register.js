@@ -54,7 +54,7 @@ function Register({
       <div className="register__content">
         <input
           type="email"
-          value={values.email}
+          value={values.email || ''}
           minLength="2"
           maxLength="30"
           placeholder="Enter email"
@@ -69,7 +69,7 @@ function Register({
       <div className="register__content-password">
         <input
           required
-          value={values.password}
+          value={values.password || ''}
           type="password"
           name="password"
           className="register__input-password"
@@ -82,7 +82,7 @@ function Register({
       <div className="register__content-username">
         <input
           required
-          value={values.username}
+          value={values.username || ''}
           type="text"
           placeholder="Enter your username"
           className="register__input-username"
