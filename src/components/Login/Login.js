@@ -68,7 +68,7 @@ function Login({
           className="login__input-email"
           name="email"
         />
-        <span className="login__input-error">{errors?.email || ''}</span>
+        <span className="login__input-error">{errors?.email}</span>
       </div>
       <label className="login__label-password">Password</label>
       <div className="login__input-password">
@@ -81,7 +81,7 @@ function Login({
           placeholder="Enter password"
           className={showSignUp ? `login__input-signup` : `login__input-pass`}
         />
-        <span className="login__input-error">{errors?.password || ''}</span>
+        <span className="login__input-error">{errors?.password}</span>
       </div>
     </ModalWithForm>
   );
