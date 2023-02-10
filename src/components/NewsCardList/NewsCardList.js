@@ -11,6 +11,7 @@ function NewsCardList({
   isSaved,
   addCard,
   savedCard,
+  deleteCard,
 }) {
   const newCards = cards.slice(0, 3);
   const moreCards = cards.slice(0, 6);
@@ -28,6 +29,7 @@ function NewsCardList({
                 card={card}
                 isLoggedIn={isLoggedIn}
                 addCard={addCard}
+                deleteCard={deleteCard}
               />
             ))
           : newCards.map((card) => (
@@ -38,6 +40,7 @@ function NewsCardList({
                 card={card}
                 isLoggedIn={isLoggedIn}
                 addCard={addCard}
+                deleteCard={deleteCard}
               />
             ))}
       </ul>

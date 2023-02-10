@@ -20,13 +20,18 @@ function Main({
   isSaved,
   savedCard,
   addCard,
+  removeCard,
 }) {
   return (
     <main className="main">
       <SearchForm showInputError={showInputError} getSearch={getSearch} />
-      {cards.length === 0 && <NotFound />}
+      {cards.length === 0 && showInputError === false && showError === false ? (
+        <NotFound />
+      ) : (
+        ``
+      )}
       {isLoading && cards.length !== 0 && !showInputError ? <Preloader /> : ``}
-      {recentSearch && (
+      {recentSearch && cards.length !== 0 ? (
         <NewsCardList
           savedCard={savedCard}
           isLoggedIn={isLoggedIn}
@@ -35,9 +40,12 @@ function Main({
           toggleShowCards={toggleShowCards}
           isSaved={isSaved}
           addCard={addCard}
+          deleteCard={removeCard}
         />
+      ) : (
+        ``
       )}
-      {searchComplete && (
+      {/* {searchComplete ? (
         <NewsCardList
           isLoggedIn={isLoggedIn}
           cards={cards}
@@ -46,8 +54,11 @@ function Main({
           toggleShowCards={toggleShowCards}
           isSaved={isSaved}
           addCard={addCard}
+          deleteCard={removeCard}
         />
-      )}
+      ) : (
+        ``
+      )} */}
       {showError && <Error />}
       <About />
     </main>

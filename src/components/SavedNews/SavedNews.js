@@ -7,8 +7,9 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function SavedNews({ theme, changeTheme, cards, deleteCard }) {
   useEffect(() => {
-    changeTheme();
-  }, [theme]);
+    // eslint-disable-next-line
+    changeTheme(true);
+  }, [theme, changeTheme]);
 
   const currentUser = useContext(CurrentUserContext);
 

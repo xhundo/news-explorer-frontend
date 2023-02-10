@@ -4,7 +4,9 @@
 
 .saved-news__content {
   display: flex;
-  margin: 0 0 62px 104px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 62px;
   flex-wrap: wrap;
   min-height: calc(100vh - 244px);
   padding-left: 0;

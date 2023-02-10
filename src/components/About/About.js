@@ -17,7 +17,7 @@ function About() {
           Kurtney Joseph is a full-stack software engineer experienced with a
           proficient foundation in JavaScript, React and Node.js and is highly
           driven to constantly learn new technologies to provide scalable,
-          cutting-edge, and maintable software solutions to effectivly build,
+          cutting-edge, and maintable software solutions to effectively build,
           and scale teams for companies and organizations.
         </article>
         <article className="about__article">

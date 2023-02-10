@@ -1,5 +1,4 @@
 import './SavedCard.css';
-import cardimg from '../../images/card/card/image_08.jpg';
 
 function SavedCard({ card, deleteCard }) {
   const handleCardDelete = (e) => {

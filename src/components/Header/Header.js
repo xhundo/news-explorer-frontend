@@ -31,8 +31,8 @@ function Header({
   };
 
   useEffect(() => {
-    changeTheme();
-  }, [isLoggedin]);
+    changeTheme(true);
+  }, [isLoggedin, changeTheme]);
 
   return (
     <header

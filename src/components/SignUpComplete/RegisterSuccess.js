@@ -6,13 +6,13 @@ function RegisterSuccess({ completeOpen, close, closeByTarget, toggleBtn }) {
     <ModalWithForm
       isOpen={completeOpen}
       title={`Registration successfully completed!`}
-      buttonTxt={'Sign in'}
-      selector={`register__success-btn`}
+      text={'Sign in'}
+      option={`register__success-btn`}
+      reverse={toggleBtn}
       signUpComplete={completeOpen}
       close={close}
       closeByTarget={closeByTarget}
-      handleSubmit={toggleBtn}
-    ></ModalWithForm>
+    />
   );
 }
 

@@ -15,3 +15,9 @@
   max-width: 368px;
   margin: 80px 0 80px 0;
 }
+
+@media screen and (max-width: 520px) {
+  .error__text {
+    max-width: 250px;
+  }
+}

@@ -17,7 +17,10 @@ function ModalWithForm({
   handleSignUpComplete,
   handleSubmit,
   revertSignUp,
+  option,
   isValid,
+  reverse,
+  text,
   nextModal,
 }) {
   return (
@@ -29,13 +32,15 @@ function ModalWithForm({
         <form onSubmit={handleSubmit} className="modal__form" noValidate>
           <h2 className={`modal__title`}>{title}</h2>
           {children}
-          <button
-            disabled={isValid === false}
-            type="submit"
-            className={selector}
-          >
-            {buttonTxt}
-          </button>
+          {signUpComplete ? (
+            <button className={option} onClick={reverse}>
+              {text}
+            </button>
+          ) : (
+            <button disabled={!isValid} type="submit" className={selector}>
+              {buttonTxt}
+            </button>
+          )}
           <button onClick={close} className="modal__close-btn"></button>
           {signUpComplete ? (
             ``

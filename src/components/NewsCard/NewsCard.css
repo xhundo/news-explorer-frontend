@@ -84,7 +84,7 @@
 
 .newscard__btn-saved {
   position: absolute;
-  transition: ease-in-out 0.2s;
+  transition: ease-in 0.01s;
   top: 19px;
   right: 16px;
   padding: 0px;
@@ -135,6 +135,11 @@
     max-width: 224px;
     height: 100%;
     margin: 0 8px 32px 0;
+  }
+
+  .newscard__save-btn:hover + .newscard__btn {
+    opacity: 0;
+    visibility: hidden;
   }
 
   .newscard__title {

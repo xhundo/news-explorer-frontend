@@ -77,8 +77,10 @@ function App() {
     if (localStorage.getItem('articles')) {
       let data = JSON.parse(localStorage.getItem('articles'));
       setCard(data);
-      setRecentSearch(true);
-      setSearchComplete(false);
+      setShowError(false);
+      if (localStorage.getItem('token')) {
+        setRecentSearch(true);
+      }
     }
   }, [isLoggedin, user]);
 
@@ -173,6 +175,7 @@ function App() {
         const recentCards = recentSave.recentCards.filter(
           (card) => card._id !== deletedCard._id,
         );
+
         localStorage.setItem('cards', JSON.stringify({ recentCards }));
         setSavedCard((c) => c.filter((c) => c._id !== deletedCard._id));
       })
@@ -189,16 +192,23 @@ function App() {
     searchNews(search)
       .then((data) => {
         setIsLoading(false);
-        setSearchComplete(true);
+        // setSearchComplete(true);
         const searchedCard = data?.articles;
         addKeyword(searchedCard, search);
         setCard(searchedCard);
+        if (searchedCard.length === 0) {
+          setRecentSearch(false);
+        } else {
+          setRecentSearch(true);
+        }
         localStorage.setItem('articles', JSON.stringify(searchedCard));
       })
       .catch((e) => {
         if (e.message === 'Search not found') {
           setShowInputError(true);
           setIsLoading(false);
+          setRecentSearch(false);
+          setSearchComplete(false);
         } else if (e.message === 'An error has occurred on the server') {
           console.log(e);
           setShowInputError(false);
@@ -307,8 +317,7 @@ function App() {
     setSignUpOpen(true);
   };
 
-  const toggleSignInComplete = (e) => {
-    e.preventDefault();
+  const toggleSignInComplete = () => {
     setSignUpComplete(false);
     setSignInOpen(true);
   };
@@ -356,6 +365,7 @@ function App() {
               showError={showError}
               handleSaved={handleSaved}
               isSaved={isSaved}
+              removeCard={removeCard}
             />
           </Route>
         </Switch>

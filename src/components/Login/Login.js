@@ -36,8 +36,6 @@ function Login({
       });
   };
 
-  console.log(values, errors);
-
   return (
     <ModalWithForm
       isOpen={modalOpen}
