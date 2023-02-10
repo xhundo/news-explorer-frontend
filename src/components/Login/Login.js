@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './Login.css';
-import { useFormValidator } from '../FormValidator/FormValidator';
+import { useFormWithValidation } from '../FormValidator/FormValidator';
 
 function Login({
   modalOpen,
@@ -17,31 +17,26 @@ function Login({
   handleSubmit,
   handleRegister,
 }) {
-  const {
-    email,
-    password,
-    handleChange,
-    errors,
-    handlePasswordChange,
-    isValid,
-    resetForm,
-  } = useFormValidator();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   useEffect(() => {
-    resetForm(null, false);
+    resetForm();
     // eslint-disable-next-line
   }, [modalOpen]);
 
   const handleUserLogin = (e) => {
     e.preventDefault();
-    handleSubmit(email, password)
+    handleSubmit(values.email, values.password)
       .then(() => {
-        resetForm('', null, false);
+        resetForm();
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  console.log(values, errors);
 
   return (
     <ModalWithForm
@@ -66,25 +61,27 @@ function Login({
       <div className="login__input">
         <input
           required
-          value={email}
+          value={values.email || ''}
           type="email"
           onChange={handleChange}
           placeholder="Enter email"
           className="login__input-email"
+          name="email"
         />
-        <span className="login__input-error">{errors?.email}</span>
+        <span className="login__input-error">{errors?.email || ''}</span>
       </div>
       <label className="login__label-password">Password</label>
       <div className="login__input-password">
         <input
           required
-          value={password}
-          onChange={handlePasswordChange}
+          value={values.password || ''}
+          onChange={handleChange}
           type="password"
+          name="password"
           placeholder="Enter password"
           className={showSignUp ? `login__input-signup` : `login__input-pass`}
         />
-        <span className="login__input-error">{errors?.password}</span>
+        <span className="login__input-error">{errors?.password || ''}</span>
       </div>
     </ModalWithForm>
   );
