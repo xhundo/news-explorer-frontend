@@ -1,5 +1,5 @@
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import { useFormValidator } from '../FormValidator/FormValidator';
+import { useFormWithValidation } from '../FormValidator/FormValidator';
 import './Register.css';
 import { useEffect } from 'react';
 
@@ -13,35 +13,28 @@ function Register({
   apiError,
   resetApiError,
 }) {
-  const {
-    email,
-    password,
-    username,
-    handleChange,
-    handlePasswordChange,
-    handleUsernameChange,
-    errors,
-    resetForm,
-    isValid,
-  } = useFormValidator();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   useEffect(() => {
     resetApiError();
-    resetForm('', false);
+    resetForm();
     // eslint-disable-next-line
   }, [modalOpen]);
 
   const handleUserSignUp = (e) => {
     e.preventDefault();
-    handleCreateUser(email, password, username)
+    handleCreateUser(values.email, values.password, values.username)
       .then(() => {
-        resetForm('', false);
+        resetForm();
       })
       .catch((e) => {
         console.log(e);
         handleSignComplete();
       });
   };
+
+  console.log(values, errors);
 
   return (
     <ModalWithForm
@@ -61,12 +54,13 @@ function Register({
       <div className="register__content">
         <input
           type="email"
-          value={email}
+          value={values.email}
           minLength="2"
           maxLength="30"
           placeholder="Enter email"
           className="register__input-email"
           required
+          name="email"
           onChange={handleChange}
         />
         <span className="register__input-error">{errors?.email}</span>
@@ -75,11 +69,12 @@ function Register({
       <div className="register__content-password">
         <input
           required
-          value={password}
+          value={values.password}
           type="password"
+          name="password"
           className="register__input-password"
           placeholder="Enter password"
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
         <span className="register__input-error">{errors?.password}</span>
       </div>
@@ -87,13 +82,14 @@ function Register({
       <div className="register__content-username">
         <input
           required
-          value={username}
+          value={values.username}
           type="text"
           placeholder="Enter your username"
           className="register__input-username"
           minLength="2"
           maxLength="30"
-          onChange={handleUsernameChange}
+          name="username"
+          onChange={handleChange}
         />
         <span className="register__input-error">{errors?.username}</span>
       </div>
