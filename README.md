@@ -4,7 +4,7 @@
 
 ## Built With
 
-[![Tech Stack](https://skillicons.dev/icons?i=,html,css,js,react,nodejs,express,mongodb)](https://skillicons.dev)
+[![Tech Stack](https://skillicons.dev/icons?i=html,css,js,react,nodejs,express,mongodb)](https://skillicons.dev)
 
 ## Backend Repo:
 
