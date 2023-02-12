@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './NewsCard.css';
 
-function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
+function NewsCard({ isLoggedIn, card, savedCard }) {
   const currentDate = new Date(card?.publishedAt).toLocaleDateString('en-US', {
     month: 'long',
     day: '2-digit',
@@ -28,32 +28,13 @@ function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
   const toggleSaved = () => {
     if (hasSaved === true) {
       setHasSaved(false);
-      handleDeleteCard(card);
     } else if (hasSaved === false) {
-      handleSaveCard(
-        card?.keyword,
-        card?.title,
-        card?.description,
-        currentDate,
-        card?.source?.name,
-        card?.url,
-        card?.urlToImage,
-      );
+      handleSaveCard();
     }
   };
 
-  const handleSaveCard = (keyword, title, text, date, source, link, image) => {
+  const handleSaveCard = () => {
     setHasSaved(true);
-    addCard(keyword, title, text, date, source, link, image);
-  };
-
-  const handleDeleteCard = (card) => {
-    currentSaved?.recentCards?.forEach((c) => {
-      if (card.title === c.title) {
-        card._id = c._id;
-        deleteCard(card._id);
-      }
-    });
   };
 
   const itemSave =

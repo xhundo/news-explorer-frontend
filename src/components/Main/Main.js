@@ -11,7 +11,6 @@ function Main({
   isLoading,
   getSearch,
   cards,
-  searchComplete,
   showCards,
   toggleShowCards,
   recentSearch,
@@ -45,20 +44,6 @@ function Main({
       ) : (
         ``
       )}
-      {/* {searchComplete ? (
-        <NewsCardList
-          isLoggedIn={isLoggedIn}
-          cards={cards}
-          savedCard={savedCard}
-          showCards={showCards}
-          toggleShowCards={toggleShowCards}
-          isSaved={isSaved}
-          addCard={addCard}
-          deleteCard={removeCard}
-        />
-      ) : (
-        ``
-      )} */}
       {showError && <Error />}
       <About />
     </main>

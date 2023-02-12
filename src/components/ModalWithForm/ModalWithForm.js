@@ -37,7 +37,7 @@ function ModalWithForm({
               {text}
             </button>
           ) : (
-            <button disabled={!isValid} type="submit" className={selector}>
+            <button type="submit" className={selector}>
               {buttonTxt}
             </button>
           )}

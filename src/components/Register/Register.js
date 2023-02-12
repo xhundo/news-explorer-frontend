@@ -1,37 +1,35 @@
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import { useFormWithValidation } from '../FormValidator/FormValidator';
+
 import './Register.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Register({
   modalOpen,
   close,
   handleCloseByTarget,
-  handleCreateUser,
   modalSwitch,
-  handleSignComplete,
-  apiError,
-  resetApiError,
+  handleComplete,
 }) {
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   useEffect(() => {
-    resetApiError();
-    resetForm();
+    setEmail('');
+    setPassword('');
+    setUsername('');
     // eslint-disable-next-line
   }, [modalOpen]);
 
-  const handleUserSignUp = (e) => {
-    e.preventDefault();
-    handleCreateUser(values.email, values.password, values.username)
-      .then(() => {
-        resetForm();
-      })
-      .catch((e) => {
-        console.log(e);
-        handleSignComplete();
-      });
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
   };
 
   return (
@@ -41,60 +39,51 @@ function Register({
       buttonTxt={`Sign up`}
       selector={`register__button`}
       title={`Sign up`}
+      handleSubmit={(e) => handleComplete(e)}
       showSignUp={modalOpen}
       close={close}
-      handleSubmit={handleUserSignUp}
       closeByTarget={handleCloseByTarget}
-      isValid={isValid}
       nextModal={modalSwitch}
     >
       <label className="register__email-label">Email</label>
       <div className="register__content">
         <input
           type="email"
-          value={values.email || ''}
+          value={email}
           minLength="2"
           maxLength="30"
           placeholder="Enter email"
           className="register__input-email"
           required
           name="email"
-          onChange={handleChange}
+          onChange={handleEmail}
         />
-        <span className="register__input-error">{errors?.email}</span>
       </div>
       <label className="register__password-label">Password</label>
       <div className="register__content-password">
         <input
           required
-          value={values.password || ''}
+          value={password}
           type="password"
           name="password"
           className="register__input-password"
           placeholder="Enter password"
-          onChange={handleChange}
+          onChange={handlePassword}
         />
-        <span className="register__input-error">{errors?.password}</span>
       </div>
       <label className="register__label-username">Username</label>
       <div className="register__content-username">
         <input
           required
-          value={values.username || ''}
+          value={username}
           type="text"
           placeholder="Enter your username"
           className="register__input-username"
           minLength="2"
           maxLength="30"
           name="username"
-          onChange={handleChange}
+          onChange={handleUsername}
         />
-        <span className="register__input-error">{errors?.username}</span>
-      </div>
-      <div className="register__error-container">
-        {apiError && (
-          <span className="register__error">This email is not available</span>
-        )}
       </div>
     </ModalWithForm>
   );

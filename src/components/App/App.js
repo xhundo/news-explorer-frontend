@@ -11,14 +11,12 @@ import SavedNews from '../SavedNews/SavedNews';
 import { searchNews } from '../../utils/ThirdPartyApi';
 import Menu from '../Menu/Menu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Api from '../../utils/MainApi';
-import { baseUrl } from '../../utils/constants';
 import Register from '../Register/Register';
 import RegisterSuccess from '../SignUpComplete/RegisterSuccess';
 
 function App() {
   const [user, setUser] = React.useState({
-    name: '',
+    name: 'Elise',
     _id: '',
   });
   const [isLoggedin, setIsLoggedIn] = React.useState(false);
@@ -27,7 +25,6 @@ function App() {
   const [signInOpen, setSignInOpen] = React.useState(false);
   const [showSignUp, setShowSignUp] = React.useState(false);
   const [signUpComplete, setSignUpComplete] = React.useState(false);
-  const [searchComplete, setSearchComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
   const [card, setCard] = React.useState([{}]);
@@ -37,72 +34,12 @@ function App() {
   const [showError, setShowError] = React.useState(false);
   const [isIconActive, setIsIconActive] = React.useState(false);
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
-  const [showApiError, setShowApiError] = React.useState(false);
-  const [savedCard, setSavedCard] = React.useState([]);
-  const apiFetch = new Api({
-    baseUrl,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
 
   useEffect(() => {
     signInOpen || isSignUpOpen
       ? document.addEventListener('keydown', handleCloseByEsc)
       : document.removeEventListener('keydown', handleCloseByEsc);
   });
-
-  useEffect(() => {
-    isLoading && setSearchComplete(false);
-  }, [isLoading]);
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      handleLogged();
-      apiFetch
-        .getCurrentUser()
-        .then((res) => {
-          setUser({ name: res?.data?.name, _id: res?.data?._id });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-    // eslint-disable-next-line
-  }, [isLoggedin]);
-
-  useEffect(() => {
-    if (localStorage.getItem('articles')) {
-      let data = JSON.parse(localStorage.getItem('articles'));
-      setCard(data);
-      setShowError(false);
-      if (localStorage.getItem('token')) {
-        setRecentSearch(true);
-      }
-    }
-  }, [isLoggedin, user]);
-
-  useEffect(() => {
-    apiFetch
-      .getArticles()
-      .then((data) => {
-        let articles = data[0]?.articles;
-        const ownerArticle = articles.filter((c) => user._id === c?.owner);
-        let recentCards = ownerArticle;
-        if (isLoggedin === true) {
-          localStorage.setItem('cards', JSON.stringify({ recentCards }));
-          setSavedCard(ownerArticle);
-        } else {
-          localStorage.removeItem('cards');
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // eslint-disable-next-line
-  }, [isLoggedin, user]);
 
   const openRegisterModal = (e) => {
     e.preventDefault();
@@ -116,74 +53,6 @@ function App() {
     setSignInOpen(true);
   };
 
-  const handleSignIn = async (email, password) => {
-    apiFetch
-      .loginUser(email, password)
-      .then(() => {
-        setSignInOpen(false);
-        handleLogged(true);
-      })
-      .catch((e) => {
-        console.log(e);
-        handleLogin();
-      });
-  };
-
-  const handleUserSignUp = async (email, password, username) => {
-    setShowApiError(false);
-    apiFetch
-      .createUser(email, password, username)
-      .then(() => {
-        setSignUpOpen(false);
-        setSignUpComplete(true);
-      })
-      .catch((e) => {
-        console.log(e);
-        e.message === `Error: 409` && setShowApiError(true);
-        setSignUpOpen(true);
-        setSignUpComplete(false);
-      });
-  };
-
-  const saveCard = (keyword, title, text, date, source, link, image) => {
-    apiFetch
-      .createArticle(keyword, title, text, date, source, link, image)
-      .then((res) => {
-        const card = res[0]?.data;
-        card.saved = true;
-        const recentCards = [];
-        recentCards.push(...savedCard, card);
-        localStorage.setItem(
-          'cards',
-          JSON.stringify({
-            recentCards,
-          }),
-        );
-        setSavedCard([...savedCard, card]);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const removeCard = (id) => {
-    apiFetch
-      .deleteArticle(id)
-      .then((data) => {
-        const deletedCard = data[0]?.articles;
-        const recentSave = JSON.parse(localStorage.getItem('cards'));
-        const recentCards = recentSave.recentCards.filter(
-          (card) => card._id !== deletedCard._id,
-        );
-
-        localStorage.setItem('cards', JSON.stringify({ recentCards }));
-        setSavedCard((c) => c.filter((c) => c._id !== deletedCard._id));
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
   const getSearch = (search) => {
     setShowInputError(false);
     setIsLoading(true);
@@ -192,15 +61,9 @@ function App() {
     searchNews(search)
       .then((data) => {
         setIsLoading(false);
-        // setSearchComplete(true);
         const searchedCard = data?.articles;
-        addKeyword(searchedCard, search);
         setCard(searchedCard);
-        if (searchedCard.length === 0) {
-          setRecentSearch(false);
-        } else {
-          setRecentSearch(true);
-        }
+        setRecentSearch(true);
         localStorage.setItem('articles', JSON.stringify(searchedCard));
       })
       .catch((e) => {
@@ -208,7 +71,6 @@ function App() {
           setShowInputError(true);
           setIsLoading(false);
           setRecentSearch(false);
-          setSearchComplete(false);
         } else if (e.message === 'An error has occurred on the server') {
           console.log(e);
           setShowInputError(false);
@@ -218,17 +80,15 @@ function App() {
       });
   };
 
-  const addKeyword = (newCards, keyword) => {
-    newCards.forEach((card) => (card.keyword = keyword));
-  };
-
   const handleLogin = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
   };
 
-  const handleLogged = () => {
+  const handleLogged = (e) => {
+    e.preventDefault();
     setIsLoggedIn(true);
+    handleClose(e);
   };
 
   const handleMenu = () => {
@@ -279,7 +139,8 @@ function App() {
     setShowSignUp(false);
   };
 
-  const handleSignupComplete = () => {
+  const handleSignupComplete = (e) => {
+    e.preventDefault();
     setSignUpOpen(false);
     setSignUpComplete(true);
   };
@@ -309,15 +170,12 @@ function App() {
     }
   };
 
-  const toggleApiError = () => {
-    setShowApiError(false);
-  };
-
   const toggleOpen = () => {
     setSignUpOpen(true);
   };
 
-  const toggleSignInComplete = () => {
+  const toggleSignInComplete = (e) => {
+    e.preventDefault();
     setSignUpComplete(false);
     setSignInOpen(true);
   };
@@ -342,22 +200,14 @@ function App() {
 
         <Switch>
           <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedin}>
-            <SavedNews
-              theme={theme}
-              changeTheme={switchTheme}
-              cards={savedCard}
-              deleteCard={removeCard}
-            />
+            <SavedNews theme={theme} changeTheme={switchTheme} />
           </ProtectedRoute>
           <Route path="/">
             <Main
               isLoggedIn={isLoggedin}
               isLoading={isLoading}
-              searchComplete={searchComplete}
               getSearch={getSearch}
-              savedCard={savedCard}
               cards={card}
-              addCard={saveCard}
               recentSearch={recentSearch}
               toggleShowCards={handleShowCards}
               showCards={showCards}
@@ -365,12 +215,12 @@ function App() {
               showError={showError}
               handleSaved={handleSaved}
               isSaved={isSaved}
-              removeCard={removeCard}
             />
           </Route>
         </Switch>
         <Footer changeTheme={toggleTheme} />
         <Login
+          handleLogged={handleLogged}
           modalOpen={signInOpen}
           handleClose={handleClose}
           showSignUp={showSignUp}
@@ -381,7 +231,6 @@ function App() {
           revertSignUp={revertSignUp}
           handleCloseByEsc={handleCloseByEsc}
           handleTarget={handleCloseByTarget}
-          handleSubmit={handleSignIn}
           handleLogin={handleLogged}
           handleAuth={handleLogin}
           handleModal={handleModalLogin}
@@ -391,13 +240,10 @@ function App() {
           modalOpen={isSignUpOpen}
           close={handleClose}
           handleCloseByTarget={handleCloseByTarget}
-          handleCreateUser={handleUserSignUp}
           handleComplete={handleSignupComplete}
           modalSwitch={switchModal}
           handleSignComplete={handleComplete}
           toggleOpen={toggleOpen}
-          apiError={showApiError}
-          resetApiError={toggleApiError}
         />
         {isMenuOpen && (
           <Menu
