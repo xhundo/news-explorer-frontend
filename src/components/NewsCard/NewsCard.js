@@ -9,7 +9,7 @@ function NewsCard({ isLoggedIn, card, savedCard }) {
     year: 'numeric',
   });
 
-  const [hasSaved, setHasSaved] = useState(false);
+  const [marked, setMarked] = useState(false);
 
   let currentSaved = JSON.parse(localStorage.getItem('cards'));
 
@@ -19,26 +19,22 @@ function NewsCard({ isLoggedIn, card, savedCard }) {
         (savedCard) => savedCard?.title === card?.title,
       )
     ) {
-      setHasSaved(true);
+      setMarked(true);
     } else {
-      setHasSaved(false);
+      setMarked(false);
     }
   }, [isLoggedIn, savedCard]);
 
-  const toggleSaved = () => {
-    if (hasSaved === true) {
-      setHasSaved(false);
-    } else if (hasSaved === false) {
-      handleSaveCard();
+  const toggleMarked = () => {
+    if (marked === true) {
+      setMarked(false);
+    } else if (marked === false) {
+      setMarked(true);
     }
   };
 
-  const handleSaveCard = () => {
-    setHasSaved(true);
-  };
-
   const itemSave =
-    hasSaved && isLoggedIn ? `newscard__btn-saved` : `newscard__save-btn`;
+    marked && isLoggedIn ? `newscard__btn-saved` : `newscard__save-btn`;
 
   return (
     <div className="newscard">
@@ -48,11 +44,23 @@ function NewsCard({ isLoggedIn, card, savedCard }) {
         <h2 className="newscard__title">{card?.title}</h2>
         <article className="newscard__paragraph">{card?.description}</article>
         <p className="newscard__topic">{card?.source?.name}</p>
-        <button
-          onClick={toggleSaved}
-          disabled={!isLoggedIn}
-          className={itemSave}
-        ></button>
+        {card.hasOwnProperty('_id') ? (
+          <>
+            <button className="newscard__trash-btn"></button>
+            <div className="newscard__topic-remove">
+              <p className="newscard__remove-text">Removed from saved</p>
+            </div>
+            <div className="newscard__topic-mark">
+              <p className="newscard__topic-text">{card?.keyword}</p>
+            </div>
+          </>
+        ) : (
+          <button
+            onClick={toggleMarked}
+            disabled={!isLoggedIn}
+            className={itemSave}
+          ></button>
+        )}
         {isLoggedIn ? (
           ``
         ) : (
