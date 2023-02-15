@@ -6,28 +6,18 @@ function ModalWithForm({
   buttonTxt,
   isOpen,
   close,
-  disabled,
   closeByTarget,
-  name,
   title,
-  handleOptions,
   showSignUp,
-  revertOptions,
   signUpComplete,
-  handleSignUpComplete,
   handleSubmit,
-  revertSignUp,
   option,
-  isValid,
   reverse,
   text,
   nextModal,
 }) {
   return (
-    <div
-      className={`modal modal__${name} ${isOpen && `modal_open`}`}
-      onClick={closeByTarget}
-    >
+    <div className={`modal ${isOpen && `modal_open`}`} onClick={closeByTarget}>
       <div className={`modal__content`}>
         <form onSubmit={handleSubmit} className="modal__form" noValidate>
           <h2 className={`modal__title`}>{title}</h2>
