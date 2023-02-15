@@ -347,7 +347,7 @@ a {
     font-size: 16px;
   }
 
-  .header-custom__btn {
+  .header__btn {
     display: flex;
     flex-direction: column;
     justify-content: center;
