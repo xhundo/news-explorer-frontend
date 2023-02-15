@@ -15,6 +15,77 @@
   margin-right: 0;
 }
 
+.newscard__trash-btn {
+  position: absolute;
+  top: 20px;
+  right: 17px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-image: url('../../images/trash.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+}
+
+.newscard__topic-remove {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 20px;
+  left: 175px;
+  width: 159px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility ease-in 0.2s;
+  height: 40px;
+  border: none;
+}
+
+.newscard__topic-mark {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 20px;
+}
+
+.newscard__topic-text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 500;
+  line-height: 24px;
+  font-size: 14px;
+  max-width: 100%;
+  padding: 8px 22px 8px 22px;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.newscard__remove-text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.newscard__trash-btn:hover + .newscard__topic-remove {
+  opacity: 1;
+  visibility: visible;
+}
+
+.newscard__trash-btn:hover {
+  transition: 0.2s ease-in-out;
+  background-image: url('../../images/Union\ \(3\).svg');
+}
+
 .newscard__content {
   display: flex;
   height: 100%;
@@ -175,6 +246,11 @@
   .newscard__date {
     margin-left: 16px;
   }
+
+  .newscard__trash-btn:hover + .newscard__topic-remove {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @media screen and (max-width: 520px) {
@@ -193,5 +269,10 @@
 
   .newscard__img {
     width: 288px;
+  }
+
+  .newscard__trash-btn:hover + .newscard__topic-remove {
+    opacity: 0;
+    visibility: hidden;
   }
 }
