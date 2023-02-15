@@ -42,7 +42,7 @@ function Login({
       title={showSignUp ? `Sign up` : `Sign in`}
       handleSubmit={(e) => handleLogged(e)}
       selector={'login__modal-button'}
-      close={handleClose}
+      close={(e) => handleClose(e)}
       handleOptions={handleSignUp}
       showSignUp={showSignUp}
       revertOptions={revertOptions}

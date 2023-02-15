@@ -7,7 +7,7 @@
 }
 
 .footer__text {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   margin: 30px 0 26px 104px;
   color: rgba(182, 188, 191, 1);
 }

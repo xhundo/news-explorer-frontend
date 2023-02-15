@@ -53,7 +53,7 @@ function Header({
             theme
               ? `header__logo-switch`
               : signInOpen || isSignUpOpen
-              ? `header__logo-none`
+              ? `header__logo`
               : `header__logo`
           }
         >

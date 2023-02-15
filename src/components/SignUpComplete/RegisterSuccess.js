@@ -7,6 +7,7 @@ function RegisterSuccess({ completeOpen, close, closeByTarget, toggleBtn }) {
       isOpen={completeOpen}
       title={`Registration successfully completed!`}
       text={'Sign in'}
+      name="complete"
       option={`register__success-btn`}
       reverse={toggleBtn}
       signUpComplete={completeOpen}

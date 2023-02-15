@@ -14,7 +14,7 @@
 .search__heading {
   margin: 80px 0 0 0;
   color: #fff;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   max-width: 608px;
   font-size: 60px;
   font-weight: 400;
@@ -25,7 +25,7 @@
 
 .search__text {
   margin: 32px 0 88px 0;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -38,7 +38,7 @@
   padding: 21px 0 21px 24px;
   width: 608px;
   max-height: 64px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;

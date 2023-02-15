@@ -3,7 +3,6 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
-import './Main.css';
 import Error from '../Error/Error';
 
 function Main({

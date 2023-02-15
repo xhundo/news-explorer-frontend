@@ -1,13 +1,14 @@
-.App {
+.app {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   max-width: 1440px;
   background-image: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg');
   background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 820px) {
-  .App {
+  .app {
     background: url('../../images/tablet.jpg');
     background-size: 100% 500px;
     background-repeat: no-repeat;
@@ -15,7 +16,7 @@
 }
 
 @media screen and (max-width: 520px) {
-  .App {
+  .app {
     background: url('../../images/320background.jpg');
     background-repeat: no-repeat;
     background-size: 100%;

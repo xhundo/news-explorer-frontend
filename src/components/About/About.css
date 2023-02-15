@@ -17,7 +17,7 @@
 }
 
 .about__text {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
@@ -29,28 +29,37 @@
 
 .about__article {
   max-width: 600px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0px;
   text-align: left;
+  margin: 0;
+}
+
+.about__article:nth-of-type(1n) {
   margin-bottom: 20px;
+}
+
+.about__article:nth-of-type(2n) {
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 820px) {
   .about {
+    align-items: flex-start;
     min-height: 48vh;
   }
 
   .about-author__photo {
-    margin: 61px 32px 61px 40px;
+    margin: 61px 32px 0 40px;
     width: 232px;
     height: 232px;
   }
 
   .about__author-text {
-    margin-top: 40px;
+    margin: 40px 0 96px 0;
   }
 
   .about__text {
@@ -60,6 +69,10 @@
 
   .about__article {
     margin: 0 40px 10px 0;
+  }
+
+  .about__article:nth-of-type(2n) {
+    margin-bottom: 0;
   }
 }
 

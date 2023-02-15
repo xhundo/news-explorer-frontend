@@ -42,9 +42,9 @@ function NewsCard({ isLoggedIn, card, savedCard }) {
 
   return (
     <div className="newscard">
-      <img className="newscard__img" src={card?.urlToImage} />
+      <img className="newscard__img" src={card?.urlToImage} alt={card?.title} />
+      <p className="newscard__date">{currentDate}</p>
       <div className="newscard__content">
-        <p className="newscard__date">{currentDate}</p>
         <h2 className="newscard__title">{card?.title}</h2>
         <article className="newscard__paragraph">{card?.description}</article>
         <p className="newscard__topic">{card?.source?.name}</p>

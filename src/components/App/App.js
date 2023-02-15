@@ -182,7 +182,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={user}>
-      <div className="App">
+      <div className="app">
         <Header
           isLoggedin={isLoggedin}
           handleModal={handleModalLogin}

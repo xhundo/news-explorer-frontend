@@ -1,7 +1,7 @@
 .login__label-email {
   margin: 0 0 9px 36px;
   color: rgba(47, 113, 229, 1);
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 15px;
@@ -12,7 +12,7 @@
 .login__label-password {
   margin: 0 0 8px 36px;
   color: rgba(47, 113, 229, 1);
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 15px;
@@ -74,7 +74,7 @@
   min-height: 64px;
   margin: 0 35px 16px 36px;
   color: #fff;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -92,7 +92,7 @@
 
 .login__input-error {
   color: red;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   margin: 3px 0 0 35px;
   max-height: 100%;
@@ -101,7 +101,7 @@
 }
 
 .login__input-email::placeholder {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -111,7 +111,7 @@
 }
 
 .login__input-password::placeholder {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;

@@ -83,7 +83,7 @@
   min-height: 64px;
   margin: 0 35px 16px 36px;
   color: #fff;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -101,7 +101,7 @@
 
 .register__input-error {
   color: red;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   margin: 3px 0 0 35px;
   max-height: 100%;
@@ -111,7 +111,7 @@
 
 .register__error {
   color: red;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   margin: 0 0 6px 0;
 }

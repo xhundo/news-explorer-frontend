@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import SavedCard from '../SavedCard/SavedCard';
+import NewsCard from '../NewsCard/NewsCard';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import './SavedNews.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -19,7 +20,7 @@ function SavedNews({ theme, changeTheme, cards, deleteCard }) {
       <ul className="saved-news__content">
         {savedCards.map((card) => (
           <li className="saved-news__list" key={card?._id}>
-            <SavedCard card={card} deleteCard={deleteCard} />
+            <NewsCard card={card} deleteCard={deleteCard} />
           </li>
         ))}
       </ul>

@@ -10,7 +10,12 @@ function Footer({ changeTheme }) {
           <Link onClick={changeTheme} to={'/'} className="footer__links">
             Home
           </Link>
-          <a className="footer__links" href="https://practicum.com/">
+          <a
+            className="footer__links"
+            rel="noreferrer"
+            href="https://practicum.com/"
+            target="_blank"
+          >
             Practicum
           </a>
         </div>
@@ -18,9 +23,17 @@ function Footer({ changeTheme }) {
           <a
             className="footer__icon-git"
             href="https://github.com/xhundo"
+            rel="noreferrer"
             alt="Github"
+            target="_blank"
           ></a>
-          <a className="footer__icon-facebook" alt="Facebook"></a>
+          <a
+            className="footer__icon-facebook"
+            rel="noreferrer"
+            href="https://www.facebook.com/PracticumUSA/"
+            alt="Facebook"
+            target="_blank"
+          ></a>
         </div>
       </div>
     </footer>
