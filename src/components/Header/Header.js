@@ -60,21 +60,17 @@ function Header({
           NewsExplorer
         </p>
       </Link>
-      <div className="header-custom__btn" onClick={toggleIcon}>
+      <div className="header__btn" onClick={toggleIcon}>
         <div
           className={
             theme
               ? `header-custom__bar1-dark ${
-                  isIconActive
-                    ? `header-custom__bar1_change`
-                    : `header-custom__bar1-dark`
+                  isIconActive && `header-custom__bar1_change`
                 }`
               : signInOpen || isSignUpOpen
               ? ``
               : `header-custom__bar1 ${
-                  isIconActive
-                    ? `header-custom__bar1_change`
-                    : `header-custom__bar1`
+                  isIconActive && `header-custom__bar1_change`
                 }`
           }
         ></div>
@@ -82,16 +78,12 @@ function Header({
           className={
             theme
               ? `header-custom__bar2-dark ${
-                  isIconActive
-                    ? `header-custom__bar2_change`
-                    : `header-custom__bar2-dark`
+                  isIconActive && `header-custom__bar2_change`
                 }`
               : signInOpen || isSignUpOpen
               ? ``
               : `header-custom__bar2 ${
-                  isIconActive
-                    ? `header-custom__bar2_change`
-                    : `header-custom__bar2`
+                  isIconActive && `header-custom__bar2_change`
                 }`
           }
         ></div>
