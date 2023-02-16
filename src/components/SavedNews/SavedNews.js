@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react';
-import SavedCard from '../SavedCard/SavedCard';
+import { useEffect } from 'react';
+
 import NewsCard from '../NewsCard/NewsCard';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import './SavedNews.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 import { savedCards } from '../../utils/constants';
 
 function SavedNews({ theme, changeTheme, cards, deleteCard }) {
@@ -11,8 +11,6 @@ function SavedNews({ theme, changeTheme, cards, deleteCard }) {
     // eslint-disable-next-line
     changeTheme(true);
   }, [theme, changeTheme]);
-
-  const currentUser = useContext(CurrentUserContext);
 
   return (
     <section className="savednews">
