@@ -64,27 +64,19 @@ function Header({
         <div
           className={
             theme
-              ? `header-custom__bar1-dark ${
-                  isIconActive && `header-custom__bar1_change`
-                }`
+              ? `header__bar1-dark ${isIconActive && `header__bar1_change`}`
               : signInOpen || isSignUpOpen
               ? ``
-              : `header-custom__bar1 ${
-                  isIconActive && `header-custom__bar1_change`
-                }`
+              : `header__bar1 ${isIconActive && `header__bar1_change`}`
           }
         ></div>
         <div
           className={
             theme
-              ? `header-custom__bar2-dark ${
-                  isIconActive && `header-custom__bar2_change`
-                }`
+              ? `header__bar2-dark ${isIconActive && `header__bar2_change`}`
               : signInOpen || isSignUpOpen
               ? ``
-              : `header-custom__bar2 ${
-                  isIconActive && `header-custom__bar2_change`
-                }`
+              : `header__bar2 ${isIconActive && `header__bar2_change`}`
           }
         ></div>
       </div>

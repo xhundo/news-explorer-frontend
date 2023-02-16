@@ -361,8 +361,8 @@ a {
     display: none;
   }
 
-  .header-custom__bar1,
-  .header-custom__bar2 {
+  .header__bar1,
+  .header__bar2 {
     width: 24px;
     height: 2px;
     background-color: #fff;
@@ -370,16 +370,16 @@ a {
     transition: 0.4s;
   }
 
-  .header-custom__bar1_change {
+  .header__bar1_change {
     transform: translate(0, 5px) rotate(-45deg);
   }
 
-  .header-custom__bar2_change {
+  .header__bar2_change {
     transform: translate(0, -5px) rotate(45deg);
   }
 
-  .header-custom__bar1-dark,
-  .header-custom__bar2-dark {
+  .header__bar1-dark,
+  .header__bar2-dark {
     width: 24px;
     height: 2px;
     background-color: #000;
