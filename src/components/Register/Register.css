@@ -1,0 +1,140 @@
+.register__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 31px;
+}
+
+.register__email-label {
+  margin: 0 0 9px 36px;
+  color: rgba(47, 113, 229, 1);
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.register__content-password {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 31px;
+}
+
+.register__input-email {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 36px 0px 36px;
+  padding: 0 0 10px 0;
+  background-color: transparent;
+  background-clip: text;
+}
+
+.register__input-password {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 36px 0px 36px;
+  padding: 0 0 10px 0;
+  background-color: transparent;
+  background-clip: text;
+}
+
+.register__password-label {
+  margin: 0 0 9px 36px;
+  color: rgba(47, 113, 229, 1);
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.register__content-username {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 39px;
+}
+
+.register__label-username {
+  margin: 0 0 9px 36px;
+  color: rgba(47, 113, 229, 1);
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.register__input-username {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 36px 0px 36px;
+  padding: 0 0 10px 0;
+  background-color: transparent;
+  background-clip: text;
+}
+
+.register__button {
+  background: #2f71e5;
+  width: 360px;
+  min-height: 64px;
+  margin: 0 35px 16px 36px;
+  color: #fff;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+}
+
+.register__button:disabled {
+  background: #e6e8eb;
+}
+
+.register__input-error {
+  color: red;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  margin: 3px 0 0 35px;
+  max-height: 100%;
+  width: 358px;
+  box-sizing: content-box;
+}
+
+.register__error {
+  color: red;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  margin: 0 0 6px 0;
+}
+
+.register__error-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 520px) {
+  .register__button {
+    width: 288px;
+    height: 64px;
+    margin: 16px 16px 16px 16px;
+    align-self: center;
+  }
+
+  .register__input-error {
+    max-height: 100%;
+    width: 246px;
+  }
+
+  .register__error {
+    margin-bottom: 0;
+  }
+}
