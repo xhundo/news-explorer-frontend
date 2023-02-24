@@ -85,22 +85,23 @@ function App() {
   }, [isLoggedin, user]);
 
   useEffect(() => {
-    apiFetch
-      .getArticles()
-      .then((data) => {
-        let articles = data[0]?.articles;
-        const ownerArticle = articles.filter((c) => user._id === c?.owner);
-        let recentCards = ownerArticle;
-        if (isLoggedin === true) {
-          localStorage.setItem('cards', JSON.stringify({ recentCards }));
-          setSavedCard(ownerArticle);
-        } else {
-          localStorage.removeItem('cards');
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    isLoggedin &&
+      apiFetch
+        .getArticles()
+        .then((data) => {
+          let articles = data[0]?.articles;
+          const ownerArticle = articles.filter((c) => user._id === c?.owner);
+          let recentCards = ownerArticle;
+          if (isLoggedin === true) {
+            localStorage.setItem('cards', JSON.stringify({ recentCards }));
+            setSavedCard(ownerArticle);
+          } else {
+            localStorage.removeItem('cards');
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     // eslint-disable-next-line
   }, [isLoggedin, user]);
 
@@ -170,12 +171,11 @@ function App() {
     apiFetch
       .deleteArticle(id)
       .then((data) => {
-        const deletedCard = data[0]?.articles;
+        const deletedCard = data[0]?.data;
         const recentSave = JSON.parse(localStorage.getItem('cards'));
         const recentCards = recentSave.recentCards.filter(
           (card) => card._id !== deletedCard._id,
         );
-
         localStorage.setItem('cards', JSON.stringify({ recentCards }));
         setSavedCard((c) => c.filter((c) => c._id !== deletedCard._id));
       })
@@ -324,7 +324,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={user}>
-      <div className="App">
+      <div className="app">
         <Header
           isLoggedin={isLoggedin}
           handleModal={handleModalLogin}
