@@ -1,5 +1,8 @@
 const apiKey = '5a6b2a43ab6041619415e96fcaf5eedd';
-const baseUrl = 'https://api.newsexplorer.students.nomoredomainssbs.ru';
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.newsexplorer.students.nomoredomainssbs.ru'
+    : 'http://localhost:3001';
 
 const currentDate = new Date().toLocaleDateString();
 const previousDate = new Date(
