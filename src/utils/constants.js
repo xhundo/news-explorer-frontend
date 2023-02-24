@@ -1,5 +1,5 @@
 const apiKey = '5a6b2a43ab6041619415e96fcaf5eedd';
-const baseUrl = 'http://localhost:3002';
+const baseUrl = 'https://api.newsexplorer.students.nomoredomainssbs.ru';
 
 const currentDate = new Date().toLocaleDateString();
 const previousDate = new Date(
