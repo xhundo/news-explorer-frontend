@@ -14,7 +14,7 @@ const checkRes = (res) => {
 
 const searchNews = (search) => {
   return fetch(
-    `https://newsapi.org/v2/everything?q=${search}&from=${previousDate}&to=${currentDate}&pageSize=100&apiKey=${apiKey}`,
+    `https://nomoreparties.co/news/v2/everything?q=${search}&from=${previousDate}&to=${currentDate}&pageSize=100&apiKey=${apiKey}`,
     {
       headers: {
         'Access-Control-Request-Headers':
