@@ -42,6 +42,10 @@ function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
     }
   };
 
+  const handleDelete = () => {
+    handleDeleteCard(card);
+  };
+
   const handleSaveCard = (keyword, title, text, date, source, link, image) => {
     setMarked(true);
     addCard(keyword, title, text, date, source, link, image);
@@ -79,7 +83,10 @@ function NewsCard({ isLoggedIn, card, addCard, savedCard, deleteCard }) {
         </p>
         {card.hasOwnProperty('_id') && card.hasOwnProperty('owner') ? (
           <>
-            <button className="newscard__trash-btn"></button>
+            <button
+              className="newscard__trash-btn"
+              onClick={handleDelete}
+            ></button>
             <div className="newscard__topic-remove">
               <p className="newscard__remove-text">Removed from saved</p>
             </div>
