@@ -9,3 +9,7 @@
 ###### Backend Repo:
 
 **https://github.com/xhundo/news-explorer-backend/tree/stage-backend**
+
+###### Deployed Live Web App:
+
+**https://www.newsexplorer.students.nomoredomainssbs.ru/**
