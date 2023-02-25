@@ -9,10 +9,16 @@ import Main from '../Main/Main';
 import Login from '../Login/Login';
 import SavedNews from '../SavedNews/SavedNews';
 import { searchNews } from '../../utils/ThirdPartyApi';
+import {
+  getCurrentUser,
+  createUser,
+  loginUser,
+  getArticles,
+  deleteArticle,
+  createArticle,
+} from '../../utils/MainApi';
 import Menu from '../Menu/Menu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Api from '../../utils/MainApi';
-import { baseUrl } from '../../utils/constants';
 import Register from '../Register/Register';
 import RegisterSuccess from '../SignUpComplete/RegisterSuccess';
 
@@ -39,20 +45,13 @@ function App() {
   const [isSignUpOpen, setSignUpOpen] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState(false);
   const [savedCard, setSavedCard] = React.useState([]);
-  const apiFetch = new Api({
-    baseUrl,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
 
   useEffect(() => {
-    signInOpen || isSignUpOpen
-      ? document.addEventListener('keydown', handleCloseByEsc)
-      : document.removeEventListener('keydown', handleCloseByEsc);
-  });
+    if (signInOpen || isSignUpOpen) {
+      document.addEventListener('keydown', handleCloseByEsc);
+    }
+    return () => document.addEventListener('keydown', handleCloseByEsc);
+  }, [signInOpen, isSignUpOpen]);
 
   useEffect(() => {
     isLoading && setSearchComplete(false);
@@ -61,8 +60,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('token')) {
       handleLogged();
-      apiFetch
-        .getCurrentUser()
+      getCurrentUser()
         .then((res) => {
           setUser({ name: res?.data?.name, _id: res?.data?._id });
         })
@@ -75,7 +73,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('articles')) {
-      let data = JSON.parse(localStorage.getItem('articles'));
+      const data = JSON.parse(localStorage.getItem('articles'));
       setCard(data);
       setShowError(false);
       if (localStorage.getItem('token')) {
@@ -86,12 +84,11 @@ function App() {
 
   useEffect(() => {
     isLoggedin &&
-      apiFetch
-        .getArticles()
+      getArticles()
         .then((data) => {
-          let articles = data[0]?.articles;
+          const articles = data[0]?.articles;
           const ownerArticle = articles.filter((c) => user._id === c?.owner);
-          let recentCards = ownerArticle;
+          const recentCards = ownerArticle;
           if (isLoggedin === true) {
             localStorage.setItem('cards', JSON.stringify({ recentCards }));
             setSavedCard(ownerArticle);
@@ -118,8 +115,7 @@ function App() {
   };
 
   const handleSignIn = async (email, password) => {
-    apiFetch
-      .loginUser(email, password)
+    loginUser(email, password)
       .then(() => {
         setSignInOpen(false);
         handleLogged(true);
@@ -132,8 +128,7 @@ function App() {
 
   const handleUserSignUp = async (email, password, username) => {
     setShowApiError(false);
-    apiFetch
-      .createUser(email, password, username)
+    createUser(email, password, username)
       .then(() => {
         setSignUpOpen(false);
         setSignUpComplete(true);
@@ -147,8 +142,7 @@ function App() {
   };
 
   const saveCard = (keyword, title, text, date, source, link, image) => {
-    apiFetch
-      .createArticle(keyword, title, text, date, source, link, image)
+    createArticle(keyword, title, text, date, source, link, image)
       .then((res) => {
         const card = res[0]?.data;
         card.saved = true;
@@ -168,8 +162,7 @@ function App() {
   };
 
   const removeCard = (id) => {
-    apiFetch
-      .deleteArticle(id)
+    deleteArticle(id)
       .then((data) => {
         const deletedCard = data[0]?.data;
         const recentSave = JSON.parse(localStorage.getItem('cards'));
@@ -255,12 +248,16 @@ function App() {
     setShowCards(true);
   };
 
-  const handleClose = (e) => {
-    e.preventDefault();
+  const closeAllModals = () => {
     setSignInOpen(false);
     setShowSignUp(false);
     setSignUpComplete(false);
     setSignUpOpen(false);
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    closeAllModals();
   };
 
   const handleModalLogin = () => {
@@ -296,16 +293,13 @@ function App() {
 
   const handleCloseByEsc = (e) => {
     if (e.key === 'Escape') {
-      setSignInOpen(false);
-      setSignUpOpen(false);
+      closeAllModals();
     }
   };
 
   const handleCloseByTarget = (e) => {
     if (e.target === e.currentTarget) {
-      setSignInOpen(false);
-      setSignUpOpen(false);
-      setSignUpComplete(false);
+      closeAllModals();
     }
   };
 
