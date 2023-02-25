@@ -13,3 +13,4 @@
 ###### Deployed Live Web App:
 
 **https://www.newsexplorer.students.nomoredomainssbs.ru/**
+###### Backend server may run slow.
