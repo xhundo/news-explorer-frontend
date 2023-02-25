@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './ModalWithForm.css';
 
 function ModalWithForm({
@@ -6,17 +7,12 @@ function ModalWithForm({
   buttonTxt,
   isOpen,
   close,
-  disabled,
   closeByTarget,
   name,
   title,
-  handleOptions,
   showSignUp,
-  revertOptions,
   signUpComplete,
-  handleSignUpComplete,
   handleSubmit,
-  revertSignUp,
   option,
   isValid,
   reverse,
